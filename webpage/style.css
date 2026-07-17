@@ -1,1 +1,17 @@
+/* ==========================================================
+   TANGO MERMAID DESIGN SETTINGS
+   ========================================================== */
 
+:root {
+
+    --max-content-width: 420px;
+
+    --logo-width: 220px;
+
+    --photo-width: 280px;
+
+    --button-height: 52px;
+
+    --corner-radius: 18px;
+
+}
