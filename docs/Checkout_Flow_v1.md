@@ -22,27 +22,35 @@ The customer scans **one MAIN QR code** to enter the checkout page, then scans i
 
 Customer scans MAIN QR.
 
-Open Checkout page.
+Open MAIN_WEB page.
 
 Display:
-
+* delete&quit button 
+* close- (and fold-??) window buttons
 * Logo
 * Greeting
 * Empty basket summary
-* Disabled PAY button
-* Disabled SEE ALL ITEMS button
-* SCAN THE TAG button
-* Camera area (waiting)
-
+* Discount code field
+* Payment Method drop-down list
+* Disabled CHECK OUT button
+* SCAN THE TAG ON YOUR ITEM button
+* Camera area marker (waiting)
+* page-down arrow
+  when scrolled down (or page-down arrow):
+*basket greeting
+* basket itemisation placeholder
+* basket itemisation summary
+* campaign explanations
+* TM stamp (small logo+email+phone nr)
 ---
 
 # STATE 1 — Waiting to scan
 
 Camera inactive until customer presses:
 
-> SCAN THE TAG
+> SCAN THE TAG ON YOUR ITEM
 
-Camera permission requested.
+Camera permission requested. The rest of the screen gets darkened, only camera 
 
 If accepted:
 
