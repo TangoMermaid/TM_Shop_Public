@@ -1,13 +1,3 @@
-Below is the **master specification**. Keep it as a Markdown file in your repo:
-
-```
-docs/Checkout_Flow_v1.md
-```
-
-(Just copy-paste this message.)
-
----
-
 # Tango Mermaid Checkout Flow v1.0
 
 ## Purpose
@@ -22,41 +12,78 @@ The customer scans **one MAIN QR code** to enter the checkout page, then scans i
 
 Customer scans MAIN QR.
 
-Open Checkout page.
+Open MAIN_WEB page.
 
 Display:
-
+* delete&quit button 
+* close- (and fold-??) window buttons
 * Logo
-* Greeting
-* Empty basket summary
-* Disabled PAY button
-* Disabled SEE ALL ITEMS button
-* SCAN THE TAG button
-* Camera area (waiting)
+* Greeting (= 2 lines: 1. "WELCOME to Tango Mermaid!", 2. "Let's fill your BASKET:")
+  
+* Empty basket summary 
+(LEFT column)
+"ITEMS: 0
+Sum-up: 0.00 € 
+Campaign: -
+Discount applied: -"
+(RIGHT column)
+"TOTAL: 0.00 €"
 
+* Discount code (under LEFT column = header "Have a discount code?" and empty field with a prompt "Type in your code")
+* Payment Method (under RIGHT column = header "Payment method:" and a drop-down list "Not chosen")
+* Disabled CHECK OUT button
+* SCAN THE TAG ON YOUR ITEM button
+* Camera area marker (waiting, camera not activated before SCAN THE TAG ON YOUR ITEM is pressed)
+* page-down arrow
+  
+  When scrolled down (or page-down arrow) - on the same page but lower:
+* basket greeting ("Treasures in YOUR BASKET:")
+* basket itemisation placeholder in 2 lines: 1. "Nothig here yet.Hurry up and fill" 2. "your basket with treasures!"
+* basket itemisation summary as above:
+  (Left column)
+"ITEMS: 0
+Sum-up: 0.00 € 
+Campaign*: none
+
+Discount applied: none"
+
+(Right column)
+"TOTAL: 0.00 €"
+
+* campaign explanations: "*Only one campaign per order.
+Please choose your biggest discount and apply."
+
+* TM stamp (small logo+email+phone nr)
+* page-up arrow
 ---
 
-# STATE 1 — Waiting to scan
+# STATE 1.1 — Waiting to scan (activated by pressing SCAN THE TAG ON YOUR ITEM button)
 
-Camera inactive until customer presses:
+Camera inactive until customer presses. After pressing
+> SCAN THE TAG ON YOUR ITEM
 
-> SCAN THE TAG
+-The rest of the screen gets darkened, the previous window state is visible but inaccessible under the dark layer
+Active/accessible: 
+camera window with its buttons, 
+delete&quit button,
+close- (and fold-??) window buttons-
 
-Camera permission requested.
+> Camera permission request displayed via
+screen message "Allow access to your camera?",
+button that gives permission: "SURE!"
 
-If accepted:
+# STATE 1.2 — Camera activated
+> If accepted by pressing "SURE!":
 
 Camera becomes active.
+Display Instructions in 2 lines: 1."Focus camera on the QR code", 2."- on the tag of your item -"
 
-Instruction:
-
-> Scan the QR code on the Tango Mermaid tag.
-
-Available:
-
-* Quit
-
----
+Available / active: same as inSTATE 1.1:
+-The rest of the screen gets darkened, the previous window state is visible but inaccessible under the dark layer
+Active/accessible: 
+camera window with its buttons, 
+delete&quit button,
+close- (and fold-??) window buttons-
 
 # STATE 2 — Scanning
 
@@ -83,45 +110,61 @@ STATE 1
 ---
 
 # STATE 3 — Item recognised
+3.1 — Item recognised - success message
+Camera becomes inactive = Hide camera
+Display 
++Instructions in 2 lines: 1."Focus camera on the QR code", 2."- on the tag of your item -"
++Message "SUCCESS!"
++Recognised code in the format "TM000003"
 
-Hide camera.
+3.2 — Item recognised - item info
+Display (top to bottom):
+* a slot with item ID code in the format "TM000003"
+* Random Compliment
 
-Display:
-
+(inside camera-placeholder)
 * Item photo
-* Compliment
-* Item ID
-* Category
-* Description
-* Price
+  
+(in the down left corner of the camera-placeholder)
+* Item ID (e.g."Item ID: TM000003")
+* Category (e.g. "Product: Apparel")
+* Description (e.g."Description: Pants")
+* Price (e.g."Price: €40")
 
-Buttons:
-
-* ADD TO BASKET
-* RE-SCAN / TYPE CODE
-
+Active/accessible: 
+* ADD IT!
+* BACK
+delete&quit button,
+close- (and fold-??) window buttons-
 ---
 
 # STATE 4 — Scan failed
+Display (top to bottom): 
 
-Display warning.
+(above camera-placeholder)
+* Manual code entry slot with a prompt "TM......  No scanning? Type in item ID from the tag"
+* ACCEPT TYPING button
+  
+(inside camera-placeholder)
+* warning in 2 lines: 1."Oops...something went wrong", 2. "Re-scan or type in manually"
+* Instructions in 5 lines: 1."1. Find Item ID on the tag,", 2. "it looks like “TM000000”", 3."2. Type it into the slot", 4. "above", 5."3. Press “ACCEPT TYPING”"
 
-Manual code entry becomes visible.
-
-Buttons:
-
+(under camera-placeholder)
+* RE-SCAN button
+  
+Active/accessible: 
+* ACCEPT TYPING
 * RE-SCAN
-* TYPE CODE
-
-ADD TO BASKET disabled.
-
+delete&quit button,
+close- (and fold-??) window buttons-
 ---
 
 # STATE 5 — Manual lookup
 
-Customer types code.
+Customer types code inside Manual code entry slot with a prompt "TM......  No scanning? Type in item ID from the tag"
 
 ENTER works exactly like SEARCH.
+ACCEPT TYPING button works exactly like SEARCH.
 
 If found:
 
@@ -137,37 +180,69 @@ Remain in STATE 5.
 
 # STATE 6 — Basket updated
 
-After ADD TO BASKET:
+Activated by pressing
+> ADD IT! button
 
-Update:
+Screen darkening is removed!
+*Display:
+ delete&quit button 
+ close- (and fold-??) window buttons
+ Logo
+ Greeting (= 2 lines: 1. "WELCOME to Tango Mermaid!", 2. "Let's fill your BASKET:")
+  
+(at the top of the page)
+*Update basket summary:
+ITEMS: 0 >> +1
+Sum-up: 0.00 €  >> +Price from the item added
+Campaign: - >> can be manually added at any stage, will affect Discount applied and calculation of TOTAL
+Discount applied: - >> updates automatically based on the Campaign chosen
+(RIGHT column)
+"TOTAL: 0.00 € >> == "Sum-up" - "Discount applied"
 
-* item count
-* subtotal
-* discounts
-* total
+*Activate:
+CHECK OUT button
 
-Append item to basket list.
+(Below that, in the 'camera' section)
+*Display:
++ Notification in 3 lines: 1."WELL DONE!". 2. ItemID, e.g. "TM000003", 3."IS NOW THE BASKET"
++ in the camera-placeholder field: 1."Scan next?" 2.SURE button == active!
 
-Each basket item contains:
+(Below that, in the scroll-down section)
+*Append the added item to basket list, for each item added display:
++ thumbnail (left side)
++ Item ID (right side)
++ description (right side)
++ price (right side)
++ DELETE button (far right side)
 
-* thumbnail
-* Item ID
-* description
-* price
-* DELETE button
+*Update all the corresponding fields at the bottom of the page (under basket list):
+(Left column)
+ITEMS: 
+Sum-up:  
+Campaign*: >>if filled in displays Campaign Name + 2 lines below for Brief Campaign Description
+Discount applied:
+(Right column)
+"TOTAL: 
 
-Activate:
+(below that)
+*Display 
++header "Your name and email - for the receipt:" witha 2-liner fill-in slot (with prompts: 1."Your full name please", 2."Your e-mail address")
++checkbox "Want to join TM club (discounts/updates)? "
++ceckbox "Did you read Privacy Policy and agreed?" (Privacy Policy as a link to a separate page)
 
-* PAY
-* SEE ALL ITEMS
++campaign explanations: "*Only one campaign per order.
+Please choose your biggest discount and apply."
 
++"Payment method:" header + drop-down (==same as above)
++"Have a discount code?" + fill-in with a prompt "Have a discount code?" (==same as above)
+
++TM stamp (small logo+email+phone nr)
++ page-up arrow
+
+> if SURE button is pressed:
 Return to
-
 ↓
-
-STATE 1
-
-(Camera waiting.)
+STATE 1.2 — Camera activated
 
 ---
 
@@ -175,41 +250,77 @@ STATE 1
 
 Customer presses
 
-SEE ALL ITEMS.
+>CHECK OUT
 
 Scroll to basket.
 
 Customer may
 
-DELETE any item.
+DELETE any item by pressing the item-specific delete button on the far right side of each item 
 
-Totals recalculate immediately.
+Item list updates immediately
+Totals recalculate immediately - everywhere
 
 ---
 
-# STATE 8 — Payment
+# STATE 8 — Pre-payment
+STATE 8.1 Payment NOT ALLOWED
+PAY button is NOT activated unless all 4 are in place:
 
-Customer presses PAY.
+1)At least 1 item is added to the basket
+2)Name-email field is filled in correctly
+3)Privacy policy box is checked
+4)Payment method is chosen
 
-Customer selects payment method.
+STATE 8.2 Payment ALLOWED
+>Customer presses PAY.
+PAY button is activated when all 4 arefilled correctly:
+
+1)At least 1 item is added to the basket
+2)Name-email field is filled in correctly
+3)Privacy policy box is checked
+4)Payment method is chosen
 
 Order summary shown.
-
 Customer confirms payment.
-
-Order saved.
+Order saved under its running unique number in the format 12345678 with all the information filled in by customer.
 
 Inventory updated later by admin.
-
 ---
 
-# STATE 9 — Finished
 
-Display:
+# STATE 9 — Payment itself
+Depending on the payment method chosen by the customer,
+we shall display relevant info for customer to complete payment:
 
-Thank you.
++order number (provide as a message)
++credentials
++slot to add screenshot of the transaction completed
++button 'I PAYED' - activated only after screenshot was submitted
 
-Basket cleared.
+Methods in use:
++Mobile Pay
++Siirto
++Bank transfer
++PayPal
++Cash - in person (greyed out unless special case is activated, perhaps having 'cash' in the Comments field is enough for an item to have this one activated - tbd )
+
+[NB! I think that redirecting to the relevant pages will be too much coding and risk if not working...so I would prefer them to pay themselves, but if possible, I would make copy-paste easier for users. Cause they'd have to open/close the window all the time to fill in all the credentials...if not too much work - later
+
+# STATE 10 — Finished
+> after 'I PAID'is pressed, display:
+
+"Congratulations, your order is complete!"
+
+"Enjoy your Tango Mermaid treasures"
+"and welcome again!"
+
+"Your receipt will be sent to the email provided"
+
+"Do not forget to share your experience on social media"
+"time to shine!"
+
+Basket cleared. 
 
 Return to STATE 0.
 
@@ -217,13 +328,13 @@ Return to STATE 0.
 
 # Quit behaviour
 
-QUIT does NOT immediately destroy basket.
+QUIT immediately destroys basket and deletes all the info.
+Display message "Your basket was deleted"
+Page window closes permanently
 
-Basket survives temporarily.
-
-Exact timeout:
-
-(TBD)
+# Close behaviour
+Basket survives temporarily, timeout: 30min.
+Needed e.g. to complete payment
 
 ---
 
@@ -241,14 +352,91 @@ Exact timeout:
 
 ---
 
-## Design principle
+## Design principles
 
-**One active task at a time.**
+**I.One active task at a time.**
 
 The customer should never wonder what to do next.
 
 Every screen should have one primary action.
 
+**II.One page.**
+All main activities should be done in one page. 
+Exceptions: privacy statement (separate page with thext - to be filled)
+Payments! 
 ---
 
 I intentionally kept this concise. It should stay under about 3 pages even as we refine it. From now on, whenever we change the flow, we update this document first, then the code. That will keep the project organized without creating heavy documentation.
+___________________________________________________________________________________________________________________________
+___________________________________________________________________________________________________________________________
+IMPRTANT
+>>> Pay screenshot upload
+A tiny Google Apps Script can:
+receive the uploaded screenshot,
+save it into your private TM Drive,
+return "Upload successful".
+The Drive folder remains completely private. The filename links the screenshot to the order.
+This is free and integrates naturally with your existing Google ecosystem.
+
+>>>Q&A 
+1. Can the customer add the same item twice?
+no way, all TM codes are uniques, even identical items will have unique codes >>reject as "already in the basket"
+2. DELETE. 
+After deleting the last item:
+to 0.000, nothing is activated yed, they will start from scratch.
+3.  Camera. After pressing SURE! ("Scan next?"), Should the camera start immediately,or should it wait until the user taps the camera window?
+Immediately, we assume permission was already given, what alse to wait for
+4. Payment. When the customer presses I PAID: Should the order become LOCKED (i.e. basket cannot be edited anymore) or still editable?
+Absolutely LOCKED. Pressing I PAID finalises the whole transaction. The order is stored in TM system.
+5. Payment screenshot. May the customer submit payment without a screenshot, or is the screenshot mandatory?
+Mandatory. I strongly prefer that, otherwise I have no leverage at all...they can press anything and take my items without paying...what will I do...in case of serious disputes, in the court, I will have at least wrong picture that they submitted as a payment proof..
+6. Should one order produce one JSON file 12345678.json or should all orders be appended into orders.json I already have a preference, but I'd like your decision.
+Based on the amount of info we store, it can be (NOW) easily one json file. Order number will become matching screenshot's name - store it in repo in 'paid_screenshots' folder? What was your thought?
+
+
+___________________________________________________________________________________________________________________________
+___________________________________________________________________________________________________________________________
+**ORDER MODEL for .json:**
+
+Order Number
+Status
+Verification
+Payment
+Screenshot
+
+Created DateTime
+
+Customer Name
+Customer Email
+
+Items
+Subtotal
+Campaign
+Discount
+Total
+
+Payment Method
+
+Screenshot Filename
+Comments
+###
+**WHERE**
+Status:
+CREATED
+COMPLETED
+CANCELLED
+
+Verification:
+UNCHECKED
+VERIFIED
+REJECTED
+
+Payment:
+NO
+YES
+
+Screenshot:
+NO
+RECEIVED
+VERIFIED
+REJECTED
