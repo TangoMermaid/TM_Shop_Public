@@ -28,43 +28,72 @@ Display:
 * delete&quit button 
 * close- (and fold-??) window buttons
 * Logo
-* Greeting
-* Empty basket summary
-* Discount code field
-* Payment Method drop-down list
+* Greeting (= 2 lines: 1. "WELCOME to Tango Mermaid!", 2. "Let's fill your BASKET:")
+  
+* Empty basket summary 
+(LEFT column)
+"ITEMS: 0
+Sum-up: 0.00 € 
+Campaign: -
+Discount applied: -"
+(RIGHT column)
+"TOTAL: 0.00 €"
+
+* Discount code (under LEFT column = header "Have a discount code?" and empty field with a prompt "Type in your code")
+* Payment Method (under RIGHT column = header "Payment method:" and a drop-down list "Not chosen")
 * Disabled CHECK OUT button
 * SCAN THE TAG ON YOUR ITEM button
-* Camera area marker (waiting)
+* Camera area marker (waiting, camera not activated before SCAN THE TAG ON YOUR ITEM is pressed)
 * page-down arrow
-  when scrolled down (or page-down arrow):
-*basket greeting
-* basket itemisation placeholder
-* basket itemisation summary
-* campaign explanations
+  
+  When scrolled down (or page-down arrow) - on the same page but lower:
+* basket greeting ("Treasures in YOUR BASKET")
+* basket itemisation placeholder in 2 lines: 1. "Nothig here yet.Hurry up and fill" 2. "your basket with treasures!"
+* basket itemisation summary as above:
+  (Left column)
+"ITEMS: 0
+Sum-up: 0.00 € 
+Campaign*: none
+
+Discount applied: none"
+
+(Right column)
+"TOTAL: 0.00 €"
+
+* campaign explanations: "*Only one campaign per order.
+Please choose your biggest discount and apply."
+
 * TM stamp (small logo+email+phone nr)
+* page-up arrow
 ---
 
-# STATE 1 — Waiting to scan
+# STATE 1.1 — Waiting to scan (activated by pressing SCAN THE TAG ON YOUR ITEM button)
 
-Camera inactive until customer presses:
-
+Camera inactive until customer presses. After pressing
 > SCAN THE TAG ON YOUR ITEM
 
-Camera permission requested. The rest of the screen gets darkened, only camera 
+-The rest of the screen gets darkened, the previous window state is visible but inaccessible under the dark layer
+Active/accessible: 
+camera window with its buttons, 
+delete&quit button,
+close- (and fold-??) window buttons-
 
-If accepted:
+> Camera permission request displayed via
+screen message "Allow access to your camera?",
+button that gives permission: "SURE!"
+
+# STATE 1.2 — Camera activated
+> If accepted by pressing "SURE!":
 
 Camera becomes active.
+Display Instructions in 2 lines: 1."Focus camera on the QR code", 2."- on the tag of your item -"
 
-Instruction:
-
-> Scan the QR code on the Tango Mermaid tag.
-
-Available:
-
-* Quit
-
----
+Available / active: same as inSTATE 1.1:
+-The rest of the screen gets darkened, the previous window state is visible but inaccessible under the dark layer
+Active/accessible: 
+camera window with its buttons, 
+delete&quit button,
+close- (and fold-??) window buttons-
 
 # STATE 2 — Scanning
 
@@ -91,45 +120,61 @@ STATE 1
 ---
 
 # STATE 3 — Item recognised
+3.1 — Item recognised - success message
+Camera becomes inactive = Hide camera
+Display 
++Instructions in 2 lines: 1."Focus camera on the QR code", 2."- on the tag of your item -"
++Message "SUCCESS!"
++Recognised code in the format "TM000003"
 
-Hide camera.
+3.2 — Item recognised - item info
+Display (top to bottom):
+* a slot with item ID code in the format "TM000003"
+* Random Compliment
 
-Display:
-
+(inside camera-placeholder)
 * Item photo
-* Compliment
-* Item ID
-* Category
-* Description
-* Price
+  
+(in the down left corner of the camera-placeholder)
+* Item ID (e.g."Item ID: TM000003")
+* Category (e.g. "Product: Apparel")
+* Description (e.g."Description: Pants")
+* Price (e.g."Price: €40")
 
-Buttons:
-
-* ADD TO BASKET
-* RE-SCAN / TYPE CODE
-
+Active/accessible: 
+* ADD IT!
+* BACK
+delete&quit button,
+close- (and fold-??) window buttons-
 ---
 
 # STATE 4 — Scan failed
+Display (top to bottom): 
 
-Display warning.
+(above camera-placeholder)
+* Manual code entry slot with a prompt "TM......  No scanning? Type in item ID from the tag"
+* ACCEPT TYPING button
+  
+(inside camera-placeholder)
+* warning in 2 lines: 1."Oops...something went wrong", 2. "Re-scan or type in manually"
+* Instructions in 5 lines: 1."1. Find Item ID on the tag,", 2. "it looks like “TM000000”", 3."2. Type it into the slot", 4. "above", 5."3. Press “ACCEPT TYPING”"
 
-Manual code entry becomes visible.
-
-Buttons:
-
+(under camera-placeholder)
+* RE-SCAN button
+  
+Active/accessible: 
+* ACCEPT TYPING
 * RE-SCAN
-* TYPE CODE
-
-ADD TO BASKET disabled.
-
+delete&quit button,
+close- (and fold-??) window buttons-
 ---
 
 # STATE 5 — Manual lookup
 
-Customer types code.
+Customer types code inside Manual code entry slot with a prompt "TM......  No scanning? Type in item ID from the tag"
 
 ENTER works exactly like SEARCH.
+ACCEPT TYPING works exactly like SEARCH.
 
 If found:
 
