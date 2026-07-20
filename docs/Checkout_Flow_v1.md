@@ -308,7 +308,7 @@ Methods in use:
 [NB! I think that redirecting to the relevant pages will be too much coding and risk if not working...so I would prefer them to pay themselves, but if possible, I would make copy-paste easier for users. Cause they'd have to open/close the window all the time to fill in all the credentials...if not too much work - later
 
 # STATE 10 — Finished
-> after 'I PAYED'is pressed, display:
+> after 'I PAID'is pressed, display:
 
 "Congratulations, your order is complete!"
 
@@ -367,3 +367,76 @@ Payments!
 ---
 
 I intentionally kept this concise. It should stay under about 3 pages even as we refine it. From now on, whenever we change the flow, we update this document first, then the code. That will keep the project organized without creating heavy documentation.
+___________________________________________________________________________________________________________________________
+___________________________________________________________________________________________________________________________
+IMPRTANT
+>>> Pay screenshot upload
+A tiny Google Apps Script can:
+receive the uploaded screenshot,
+save it into your private TM Drive,
+return "Upload successful".
+The Drive folder remains completely private. The filename links the screenshot to the order.
+This is free and integrates naturally with your existing Google ecosystem.
+
+>>>Q&A 
+1. Can the customer add the same item twice?
+no way, all TM codes are uniques, even identical items will have unique codes >>reject as "already in the basket"
+2. DELETE. 
+After deleting the last item:
+to 0.000, nothing is activated yed, they will start from scratch.
+3.  Camera. After pressing SURE! ("Scan next?"), Should the camera start immediately,or should it wait until the user taps the camera window?
+Immediately, we assume permission was already given, what alse to wait for
+4. Payment. When the customer presses I PAID: Should the order become LOCKED (i.e. basket cannot be edited anymore) or still editable?
+Absolutely LOCKED. Pressing I PAID finalises the whole transaction. The order is stored in TM system.
+5. Payment screenshot. May the customer submit payment without a screenshot, or is the screenshot mandatory?
+Mandatory. I strongly prefer that, otherwise I have no leverage at all...they can press anything and take my items without paying...what will I do...in case of serious disputes, in the court, I will have at least wrong picture that they submitted as a payment proof..
+6. Should one order produce one JSON file 12345678.json or should all orders be appended into orders.json I already have a preference, but I'd like your decision.
+Based on the amount of info we store, it can be (NOW) easily one json file. Order number will become matching screenshot's name - store it in repo in 'paid_screenshots' folder? What was your thought?
+
+
+___________________________________________________________________________________________________________________________
+___________________________________________________________________________________________________________________________
+**ORDER MODEL for .json:**
+
+Order Number
+Status
+Verification
+Payment
+Screenshot
+
+Created DateTime
+
+Customer Name
+Customer Email
+
+Items
+Subtotal
+Campaign
+Discount
+Total
+
+Payment Method
+
+Screenshot Filename
+Comments
+###
+**WHERE**
+Status:
+CREATED
+COMPLETED
+CANCELLED
+
+Verification:
+UNCHECKED
+VERIFIED
+REJECTED
+
+Payment:
+NO
+YES
+
+Screenshot:
+NO
+RECEIVED
+VERIFIED
+REJECTED
