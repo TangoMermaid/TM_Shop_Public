@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tango Mermaid Checkout</title>
+
+    <link rel="stylesheet" href="checkout.css">
+</head>
+
+<body>
+
+<div id="page">
+
+    <!-- TOP BAR -->
+
+    <div id="topBar">
+
+        <img
+            id="quitButton"
+            src="../Page_elements/delete_quit.png"
+            alt="Delete & Quit">
+
+    </div>
+
+    <!-- LOGO -->
+
+    <div id="logoArea">
+
+        <img id="logo"
+             src="../Page_elements/Logo board_Colour_PNG.png"
+             alt="Tango Mermaid">
+
+    </div>
+
+    <!-- GREETING -->
+
+    <div id="greeting">
+
+        <h1>WELCOME to Tango Mermaid!</h1>
+
+        <h2>Let's fill your BASKET:</h2>
+
+    </div>
+
+    <!-- BASKET SUMMARY -->
+
+    <section id="basketSummary">
+
+        <div class="summaryColumn">
+
+            <p><b>ITEMS:</b> 0</p>
+
+            <p><b>Sum-up:</b> 0.00 €</p>
+
+            <p><b>Campaign:</b> -</p>
+
+            <p><b>Discount applied:</b> -</p>
+
+        </div>
+
+        <div class="summaryColumn totalColumn">
+
+            <p class="totalLine">
+                <span class="totalTitle">TOTAL:&nbsp;</span>
+                <span class="totalValue">0.00 €</span>
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- DISCOUNT / PAYMENT -->
+
+    <section id="options">
+
+        <div class="optionColumn">
+
+            <label>Have a discount code?</label>
+
+            <input
+                type="text"
+                placeholder="Type in your code">
+
+        </div>
+
+        <div class="optionColumn">
+
+            <label class="paymentLabel">Payment method:</label>
+
+            <select>
+
+                <option>Not chosen</option>
+
+            </select>
+
+            <button id="checkoutButton" disabled>
+
+                CHECK OUT
+
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- SCANNER -->
+
+    <button id="scanButton">
+
+        SCAN THE TAG ON YOUR ITEM
+
+    </button>
+
+    <!-- CAMERA PLACEHOLDER -->
+
+    <div id="cameraPlaceholder">
+
+        Camera area
+
+    </div>
+
+    <!-- PAGE DOWN -->
+
+    <div id="pageDown">
+
+        ↓
+
+    </div>
+
+</div>
+
+<script src="checkout.js"></script>
+
+</body>
+
+</html>
