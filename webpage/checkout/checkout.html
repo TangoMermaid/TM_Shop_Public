@@ -13,6 +13,9 @@
 
 <div id="page">
 
+    <div class="guideBlue2"></div>
+    <div class="guideRed2"></div>
+
     <!-- TOP BAR -->
 
     <div id="topBar">
@@ -50,7 +53,7 @@
 
         <div class="summaryColumn">
 
-            <p><b>ITEMS:</b> 0</p>
+            <p><b>ITEMS:</b> <strong>0</strong></p>
 
             <p><b>Sum-up:</b> 0.00 €</p>
 
@@ -89,7 +92,7 @@
 
             <label class="paymentLabel">Payment method:</label>
 
-            <select>
+            <select class="paymentSelect">
 
                 <option>Not chosen</option>
 
@@ -105,6 +108,15 @@
 
     </section>
 
+    <div id="divider"></div>
+
+<!-- LOWER WORKSPACE -->
+
+<div id="lowerWorkspace">
+    <div id="screenFoldLine"></div>
+
+    <div id="scannerVeil"></div>
+
     <!-- SCANNER -->
 
     <button id="scanButton">
@@ -113,15 +125,176 @@
 
     </button>
 
+
     <!-- CAMERA PLACEHOLDER -->
 
-    <div id="cameraPlaceholder">
+    <div id="scannerArea">
 
-        Camera area
+        <div id="scannerVeil"></div>
+
+        <div id="cameraPlaceholder">
+
+        </div>
 
     </div>
 
-    <!-- PAGE DOWN -->
+
+<!-- SOCIAL WATERMARK -->
+
+<div id="socialWatermark">
+
+    <div id="socialText">
+
+        Tag me if you can!<br>
+        #TangoMermaid
+
+    </div>
+
+    <div id="socialIcons">
+
+        <img src="../Page_elements/facebook.png" alt="Facebook">
+
+        <img src="../Page_elements/instagram.png" alt="Instagram">
+
+        <img src="../Page_elements/pinterest.png" alt="Pinterest">
+
+    </div>
+
+</div>
+
+<!-- BASKET AREA -->
+
+<div id="basketLower">
+
+    <h3>Treasures in YOUR BASKET:</h3>
+
+    <p>
+        Nothing here yet. Hurry up and fill<br>
+        your basket with treasures!
+    </p>
+
+</div>
+
+<div id="lowerDividerBeige"></div>
+
+<div id="lowerDividerBlack"></div>
+
+</div>
+
+<!-- LOWER WORKSPACE END -->
+
+<div id="basketTotals">
+
+    <div id="basketLeft">
+
+        <p><b>ITEMS:</b> <strong>0</strong></p>
+
+        <p><b>Sum-up:</b> 0.00 €</p>
+
+        <p><b>Campaign:</b> -</p>
+
+        <div id="campaignDetails">
+
+            TEST LINE 1<br>
+            TEST LINE 2
+
+        </div>
+
+        <p><b>Discount applied:</b> -</p>
+
+    </div>
+
+    <div id="basketRight">
+
+        <p><b>TOTAL:</b> <strong>0.00 €</strong></p>
+        <br>
+
+<p class="paymentLabel">Payment method:</p>
+
+<select class="paymentSelect">
+
+    <option>Not chosen</option>
+
+</select>
+
+    </div>
+
+</div>
+
+<!-- RECEIPT DETAILS -->
+
+<div id="receiptDetails">
+
+    <p class="receiptTitle">
+        Your name and email - for the receipt:
+    </p>
+
+<textarea
+    id="receiptInput"
+    placeholder="Your full name please&#10;Your e-mail address"
+    disabled></textarea>
+
+    <label class="checkLine">
+
+        <span>
+            Want to join TM club (discounts/updates)?
+        </span>
+
+        <input type="checkbox">
+
+    </label>
+
+
+    <label class="checkLine">
+
+        <span>
+            Did you read Privacy Policy and agreed?
+        </span>
+
+        <input type="checkbox">
+
+    </label>
+
+</div>
+
+<button id="payButton" disabled>
+
+    PAY
+
+</button>
+
+<div id="campaignNote">
+
+    <span class="noteStar">*</span><span class="noteText">Only one campaign per order.<br>
+    Choose your biggest discount and type<br>
+    in discount code at the top of the page.</span>
+
+</div>
+
+<img
+    id="contactLogo"
+    src="../Page_elements/T-LOGO_PNG.png"
+    alt="Tango Mermaid">
+
+<p id="contactBrand">
+
+    Tango Mermaid
+
+</p>
+
+<p id="contactSlogan">
+
+    For every occasion. For every dance.
+
+</p>
+
+<p id="contactInfo">
+
+    In touch: tango.mermaid.tm@gmail.com, +358 413139325
+
+</p>
+
+<!-- PAGE DOWN -->
 
     <div id="pageDown">
 
@@ -130,6 +303,22 @@
     </div>
 
 </div>
+
+<button id="pageUpButton">
+
+    <img
+        src="../Page_elements/page_up.png"
+        alt="Page up">
+
+</button>
+
+<button id="pageDownButton">
+
+    <img
+        src="../Page_elements/page_down.png"
+        alt="Page down">
+
+</button>
 
 <script src="checkout.js"></script>
 
