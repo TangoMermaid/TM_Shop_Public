@@ -10,6 +10,19 @@
     src: url("../Page_elements/SourceSans3-VariableFont_wght.ttf");
 }
 
+@font-face {
+    font-family:"Bubble3D";
+    src:url("../Page_elements/Bubble3D.ttf");
+}
+
+@font-face{
+
+    font-family:"Nautilus";
+
+    src:url("../Page_elements/Nautilus.otf");
+
+}
+
 /* ---------- COLOURS ---------- */
 
 :root{
@@ -61,6 +74,8 @@ body{
 
     padding:27px;
 
+    position:relative;
+
 }
 
 /* ---------- TOP ---------- */
@@ -97,13 +112,15 @@ body{
 
     text-align:center;
 
-    margin-top:5px;
+    margin-top:-75px;
+
+    margin-bottom:-8px;
 
 }
 
 #logo{
 
-    width:145px;
+    width:131px;
 
 }
 
@@ -113,9 +130,11 @@ body{
 
     text-align:center;
 
-    margin-top:6px;
+    margin-top:22px;
 
-    margin-bottom:18px;
+    margin-bottom:12px;
+
+    line-height:0.7;
 
 }
 
@@ -123,7 +142,7 @@ body{
 
     font-family:"Emily";
 
-    font-size:20px;
+    font-size:18px;
 
     font-weight:400;
 
@@ -133,11 +152,11 @@ body{
 
 #greeting h2{
 
-    margin-top:6px;
+    margin-top:12px;
 
     font-family:"SourceSans";
 
-    font-size:21px;
+    font-size:19px;
 
     font-weight:700;
 
@@ -183,7 +202,7 @@ body{
 
     align-items:flex-start;
 
-    margin-left:6%;
+    padding-left:22px;
 
 }
 
@@ -191,7 +210,9 @@ body{
 
     font-size:14px;
 
-    font-weight:500;
+    font-weight:700;
+
+    color:black;
 
 }
 
@@ -199,13 +220,17 @@ body{
 
     font-size:14px;
 
-    font-weight:900;
+    font-weight:700;
+
+    color:black;
 
 }
 
 .totalLine{
 
     margin-bottom:18px;
+
+    margin-left:-6px;
 
 }
 
@@ -219,14 +244,14 @@ body{
 
     align-items:flex-end;
 
-    margin-top:-50px;
+    margin-top:-64px;
     margin-bottom:18px;
 
 }
 
 .optionColumn{
 
-    width:40%;
+    width:46%;
 
     display:flex;
 
@@ -247,9 +272,10 @@ body{
 }
 
 input,
-select{
+select,
+.paymentSelect{
 
-    width:100%;
+    width:95%;
 
     height:28px;
 
@@ -281,7 +307,8 @@ input::placeholder{
 
 }
 
-select{
+select,
+.paymentSelect{
 
     appearance:none;
 
@@ -299,29 +326,56 @@ select{
 
 }
 
+/* ---------- DIVIDER ---------- */
+
+#divider{
+
+    width:calc(100% + 54px);
+
+    height:5px;
+
+    background:var(--beige);
+
+    margin:10px 0 10px -27px;
+
+}
+
 /* ---------- BUTTONS ---------- */
 
-#checkoutButton{
+#checkoutButton,
+#payButton{
 
-    width:100%;
+    width:95%;
 
-    height:40px;
+    height:48px;
 
-    margin-top:10px;
+    margin-top:6px;
 
     background:var(--light-grey);
 
     color:var(--dark-grey);
 
-    border:2px solid var(--dark-grey);
+    border:3px solid var(--dark-grey);
 
     border-radius:8px;
 
     font-family:"SourceSans";
 
-    font-size:13px;
+    font-size:15px;
 
-    font-weight:700;
+    font-weight:900;
+
+    margin-top:20px;
+
+}
+
+#payButton{
+
+    width:42%;
+
+    position:relative;
+
+    left:29%;
 
 }
 
@@ -331,37 +385,92 @@ select{
 
     width:90%;
 
-    margin:10px auto;
+    height:39px;
 
-    height:56px;
+    margin:10px auto 10px auto;
 
-    border:none;
+    position:relative;
 
-    border-radius:15px;
+    top:10px;
 
-    background:#0d0d0d;
+    border:3px solid black;
 
-    color:white;
+    border-radius:8px;
+
+    background:var(--blue);
+
+    color:var(--beige);
+
+    font-family:"Bubble3D";
 
     font-size:18px;
 
-    font-weight:bold;
+    font-weight:400;
+
+    -webkit-text-stroke:0.4px black;
+
+    cursor:pointer;
+
+    z-index:2;
 
 }
 
 /* ---------- CAMERA ---------- */
 
+/* ---------- LOWER WORKSPACE ---------- */
+
+#lowerWorkspace{
+
+    width:calc(100% + 54px);
+
+    z-index:0;
+
+    margin-left:-27px;
+
+    position:relative;
+
+    background-image:url("../Page_elements/scales.jpeg");
+
+    background-size:390px auto;
+
+    background-repeat:repeat-y;
+
+    background-position:top center;
+
+    padding:0 27px 0px 27px;
+
+    height:762px;
+
+    margin-top:-10px;
+
+    overflow:hidden;
+
+}
+
+
+/* ---------- CAMERA ---------- */
+
+#scannerArea{
+
+    position:relative;
+
+    width:208px;
+
+    height:208px;
+
+    margin:30px auto 40px auto;
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+}
+
 #cameraPlaceholder{
 
-    width:90%;
+    position:absolute;
 
-    height:260px;
-
-    margin:15px auto;
-
-    background:#111;
-
-    color:#777;
+    inset:0;
 
     display:flex;
 
@@ -369,7 +478,640 @@ select{
 
     justify-content:center;
 
-    border-radius:20px;
+    color:#777;
+
+    border-radius:12px;
+
+    /*background:rgba(0,0,0,0.35);*/
+
+    z-index:2;
+
+}
+
+#scannerVeil{
+
+    position:absolute;
+
+    inset:0;
+
+    background:black;
+
+    opacity:0.5;
+
+    z-index:1;
+
+}
+
+/* ---------- LOWER DIVIDERS ---------- */
+
+#lowerDividerBeige{
+
+    position:absolute;
+
+    top:752px;
+
+    left:0;
+
+    width:100%;
+
+    height:5px;
+
+    background:var(--beige);
+
+    z-index:3;
+
+}
+
+#lowerDividerBlack{
+
+    position:absolute;
+
+    top:757px;
+
+    left:0;
+
+    width:100%;
+
+    height:5px;
+
+    background:var(--black);
+
+    z-index:3;
+
+}
+
+/* ---------- LOWER BASKET ---------- */
+
+#basketLower{
+
+    text-align:center;
+    position:relative;
+
+    z-index:2;
+
+    color:white;
+
+    margin-top:40px;
+
+}
+
+
+#basketLower h3{
+
+    font-family:"Emily";
+
+    font-size:16px;
+
+    font-weight:400;
+
+    letter-spacing:3px;
+
+    margin-bottom:50px;
+
+}
+
+
+#basketLower p{
+
+    font-family:"SourceSans";
+
+    font-size:12px;
+
+    font-weight:500;
+
+    letter-spacing:2px;
+
+}
+
+/* ---------- LOWER TOTALS ---------- */
+
+#basketTotals{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-top:-20px;
+
+    font-family:"SourceSans";
+
+    font-size:14px;
+
+    font-weight:500;
+
+}
+
+#basketTotals .paymentLabel{
+
+    display:block;
+
+    font-size:14px;
+
+    font-weight:500;
+
+    margin-top:-10px;
+
+    margin-bottom:-4px;
+
+}
+
+#basketTotals select{
+
+    width:95%;
+
+    height:28px;
+
+    padding:0 10px;
+
+    background:white;
+
+    border:2px solid var(--beige);
+
+    border-radius:8px;
+
+    color:var(--beige);
+
+    font-size:12px;
+
+    font-weight:500;
+
+    text-align:center;
+
+    appearance:none;
+
+    -webkit-appearance:none;
+
+    -moz-appearance:none;
+
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12'%3E%3Cpath fill='%23dfc5af' d='M1 3l5 6 5-6z'/%3E%3C/svg%3E");
+
+    background-repeat:no-repeat;
+
+    background-position:right 10px center;
+
+    padding-right:28px;
+
+}
+
+#basketTotals strong{
+
+    font-weight:900;
+
+    color:black;
+
+}
+
+#basketLeft{
+
+    width:50%;
+
+    line-height:1.8;
+
+}
+
+#basketTotals select{
+
+    margin-top:4px;
+
+}
+
+
+#basketRight{
+
+    width:50%;
+
+    line-height:1.8;
+
+    padding-left:20px;
+
+}
+
+
+#campaignDetails{
+
+    font-family:"SourceSans";
+
+    font-size:11px;
+
+    font-weight:500;
+
+    color:#888;
+
+    line-height:1.3;
+
+    min-height:0px;
+
+    margin:0px 0;
+
+}
+
+/* ---------- SCREEN FOLD GUIDES ---------- */
+
+/* 1st screen guides */
+#page::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:740px;
+
+    left:0;
+
+    width:100%;
+
+    height:2px;
+
+    background:blue;
+
+    pointer-events:none;
+
+    z-index:20;
+
+}
+
+#page::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:844px;
+
+    left:0;
+
+    width:100%;
+
+    height:2px;
+
+    background:red;
+
+    pointer-events:none;
+
+    z-index:20;
+
+}
+
+/* 2nd screen guides */
+
+#page .guideBlue2{
+
+    position:absolute;
+
+    top:1480px;
+
+    left:0;
+
+    width:100%;
+
+    height:2px;
+
+    background:blue;
+
+    pointer-events:none;
+
+    z-index:20;
+
+}
+
+#page .guideRed2{
+
+    position:absolute;
+
+    top:1688px;
+
+    left:0;
+
+    width:100%;
+
+    height:2px;
+
+    background:red;
+
+    pointer-events:none;
+
+    z-index:20;
+
+}
+
+/* ---------- RECEIPT DETAILS ---------- */
+
+#receiptDetails{
+
+    margin-top:10px;
+
+    font-family:"SourceSans";
+
+}
+
+
+.receiptTitle{
+
+    text-align:center;
+
+    font-size:14px;
+
+    font-weight:500;
+
+    margin-bottom:3px;
+
+}
+
+#receiptInput{
+
+    width:100%;
+
+    height:44px;
+
+    resize:none;
+
+    background:var(--light-beige);
+
+    border:2px solid var(--black);
+
+    border-radius:8px;
+
+    font-family:"SourceSans";
+    font-style:italic;
+
+    font-size:12px;
+
+    font-weight:400;
+
+    color:var(--dark-grey);
+
+    text-align:center;
+
+    padding:1.8px;
+
+    line-height:1.4;
+
+    margin-bottom:6px;
+
+}
+    
+
+
+
+#receiptInput::placeholder{
+
+    color:var(--dark-grey);
+
+}
+
+
+#receiptInput:disabled{
+
+    opacity:1;
+
+}
+
+
+#receiptDetails input[type="text"]{
+
+    border-radius:8px 8px 0 0;
+
+}
+
+
+#receiptDetails input[type="email"]{
+
+    border-top:none;
+
+    border-radius:0 0 8px 8px;
+
+}
+
+#receiptDetails input:disabled{
+
+    opacity:1;
+
+}
+
+#receiptDetails input::placeholder{
+
+    color:var(--dark-grey);
+
+}
+
+
+.checkLine{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    font-size:12px;
+
+    font-weight:500;
+
+    margin-top:0px;
+    
+    padding:0 30px;
+
+}
+
+
+.checkLine input{
+
+    width:16px;
+
+    min-width:16px;
+
+    height:15px;
+
+    padding:0;
+
+    appearance:none;
+
+    -webkit-appearance:none;
+
+    background:white;
+
+    border:2px solid black;
+
+    border-radius:3px;
+
+}
+
+.checkLine:nth-of-type(1) input{
+
+    background:white;
+
+}
+
+
+.checkLine:nth-of-type(2) input{
+
+    background:var(--light-beige);
+
+}
+
+#campaignNote{
+
+    width:70%;
+
+    margin:38px auto 0 auto;
+
+    display:flex;
+
+    font-family:"SourceSans";
+
+    font-size:11px;
+
+    font-weight:500;
+
+    color:#888;
+
+    line-height:1.3;
+
+}
+
+.noteStar{
+
+    width:10px;
+
+    margin-left:20px;
+
+}
+
+
+.noteText{
+
+    flex:1;
+
+}
+
+/* ---------- CONTACT ---------- */
+
+#contactBlock{
+
+    margin-top:2px;
+
+    text-align:center;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+}
+
+#contactLogo{
+
+    display:block;
+
+    width:45px;
+
+    height:auto;
+
+    margin-top:20px;
+    margin-right:auto;
+    margin-bottom:10px;
+    margin-left:auto;
+
+}
+
+#contactBrand{
+
+    font-family:"Nautilus";
+
+    font-size:15px;
+
+    color:black;
+
+    line-height:1;
+
+    margin:0;
+
+    text-align:center;
+
+}
+
+#contactSlogan{
+
+    font-family:"SourceSans";
+
+    font-size:10px;
+
+    font-weight:500;
+
+    color:black;
+
+    letter-spacing:1.8px;
+
+    line-height:1.1;
+
+    margin:5px 0 18px 0;
+
+    text-align:center;
+
+}
+
+#contactInfo{
+
+    font-family:"SourceSans";
+
+    /*font-style:italic;*/
+
+    font-size:12px;
+
+    font-weight:500;
+
+    color:var(--blue);
+
+    line-height:1.3;
+
+    margin:15;
+
+    text-align:center;
+
+}
+
+/* ---------- PAGE NAVIGATION ---------- */
+
+#pageUpButton,
+#pageDownButton{
+
+    position:fixed;
+
+    right:12px;
+
+    border:none;
+
+    background:none;
+
+    padding:0;
+
+    cursor:pointer;
+
+    z-index:999;
+
+}
+
+#pageUpButton{
+
+    top:12px;
+
+}
+
+#pageDownButton{
+
+    bottom:12px;
+
+}
+
+#pageUpButton img,
+#pageDownButton img{
+
+    width:30px;
+
+    height:auto;
+
+    display:block;
 
 }
 
@@ -420,5 +1162,75 @@ select{
     position:relative;
 
     top:2px;
+
+}
+
+/* ---------- SOCIAL WATERMARK ---------- */
+
+#socialWatermark{
+
+    text-align:center;
+
+    margin:80px auto 20px auto;
+
+    opacity:1;
+
+    color:#777;
+
+}
+
+
+#socialText{
+
+    font-size:13px;
+
+    font-weight:500;
+
+    color:black;
+
+    line-height:1.2;
+
+    margin-bottom:8px;
+
+}
+
+
+#socialIcons{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:8px;
+
+}
+
+
+#socialIcons img{
+
+    height:34px;
+
+    width:auto;
+
+    object-fit:contain;
+
+}
+
+#socialIcons img:nth-child(1),
+#socialIcons img:nth-child(2){
+
+    height:30px;
+
+    position:relative;
+
+    left:2px;
+
+}
+
+#socialIcons img:nth-child(3){
+
+    position:relative;
+
+    top:-2px;
 
 }
