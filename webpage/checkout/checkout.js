@@ -26,6 +26,10 @@ fetch("../public_data/products.json")
 
 /* ---------- FUTURE VARIABLES ---------- */
 
+/* ---------- CAMERA ---------- */
+
+let cameraStream = null;
+
 // Basket will be stored here
 let basket = [];
 
@@ -35,6 +39,80 @@ let discount = null;
 // Current order
 let currentOrder = null;
 
+/* ---------- ACTIVATION VEIL ---------- */
+
+const scanButton = document.getElementById("scanButton");
+const topVeil = document.getElementById("topVeil");
+const bottomVeil = document.getElementById("bottomVeil");
+
+if (scanButton && topVeil && bottomVeil){
+
+    scanButton.addEventListener("click", () => {
+
+        const divider = document.getElementById("divider");
+
+        const dividerBottom =
+            divider.offsetTop + divider.offsetHeight;
+
+        topVeil.style.top = "0px";
+        topVeil.style.height = dividerBottom + "px";
+
+        const firstRedLine = 844;
+
+        bottomVeil.style.top = firstRedLine + "px";
+        bottomVeil.style.bottom = "0";
+
+        topVeil.style.display = "block";
+        bottomVeil.style.display = "block";
+
+        document.getElementById("permissionDialog").style.display = "flex";
+
+        document.getElementById("allowCameraButton").onclick = async () => {
+
+    try{
+
+        cameraStream = await navigator.mediaDevices.getUserMedia({
+
+            video:{
+                facingMode:"environment"
+            }
+
+        });
+
+        const camera = document.createElement("video");
+
+        camera.autoplay = true;
+
+        camera.playsInline = true;
+
+        camera.srcObject = cameraStream;
+
+        camera.style.width = "100%";
+        camera.style.height = "100%";
+        camera.style.objectFit = "cover";
+
+        const placeholder = document.getElementById("cameraPlaceholder");
+
+        placeholder.innerHTML = "";
+
+        placeholder.appendChild(camera);
+
+        console.log("Camera successfully attached.");
+
+    }
+
+    catch(error){
+
+        console.error(error);
+        alert("Camera could not be started.");
+
+    }
+
+};
+
+    });
+
+}
 
 /* ---------- PAGE NAVIGATION ---------- */
 
