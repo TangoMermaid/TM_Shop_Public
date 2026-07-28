@@ -440,3 +440,18 @@ NO
 RECEIVED
 VERIFIED
 REJECTED
+
+===========================================================================
+One suggestion for the next cleanup
+
+We're starting to see a pattern: every state creates its own timer.
+
+I suggest that after Prototype 2 is visually finished, we create one helper function:
+
+cancelAllTimers();
+
+Then BACK would simply call:
+
+cancelAllTimers();
+
+instead of remembering every individual timeout. It'll make the code much cleaner and prevent exactly this type of bug as more states are added.
