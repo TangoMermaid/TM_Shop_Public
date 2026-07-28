@@ -10,11 +10,6 @@
     src: url("../Page_elements/SourceSans3-VariableFont_wght.ttf");
 }
 
-@font-face {
-    font-family:"Bubble3D";
-    src:url("../Page_elements/Bubble3D.ttf");
-}
-
 @font-face{
 
     font-family:"Nautilus";
@@ -406,6 +401,7 @@ select,
 #scanButton{
 
     display:block;
+    visibility:visible;
 
     width:90%;
 
@@ -425,7 +421,7 @@ select,
 
     color:var(--beige);
 
-    font-family:"Bubble3D";
+    font-family:"Emily";
 
     font-size:18px;
 
@@ -1280,9 +1276,167 @@ select,
 
 /* ---------- CAMERA PERMISSION ---------- */
 
+/* ---------- SUCCESS PANEL ---------- */
+
+#successPanel{
+
+    display:none;
+
+    position:absolute;
+
+    inset:0;
+
+    background:white;
+
+    border-radius:12px;
+
+    z-index:4;
+
+    text-align:center;
+
+}
+
+#successTitle{
+
+    margin-top:22px;
+    transform:translateY(10px);
+
+    font-family:"SourceSans";
+
+    font-size:18px;
+
+    font-weight:500;
+
+    color:black;
+
+}
+
+#successID{
+
+    margin-top:24px;
+    transform:translateY(-5px);
+
+    font-family:"SourceSans";
+
+    font-size:24px;
+
+    font-weight:900;
+
+    color:black;
+
+}
+
+#successText{
+
+    margin-top:24px;
+    transform:translateY(-18px);
+
+    font-family:"SourceSans";
+
+    font-size:18px;
+
+    font-weight:500;
+
+    color:black;
+
+}
+
+/* ---------- ITEM IDENTIFIED STATE ---------- */
+
+#scanItemID,
+#scanCompliment,
+#itemButtons{
+
+    display:none;
+
+}
+
+#itemPanel{
+
+    display:none;
+
+    position:absolute;
+
+    inset:0;
+
+    background:white;
+
+    border-radius:12px;
+
+    z-index:4;
+
+    text-align:center;
+
+}
+
+
+#itemTitle{
+
+    margin-top:35px;
+
+    font-family:"SourceSans";
+
+    font-size:18px;
+
+    font-weight:500;
+
+    color:black;
+
+}
+
+
+#itemID{
+
+    margin-top:10px;
+
+    font-family:"SourceSans";
+
+    font-size:24px;
+
+    font-weight:900;
+
+    color:black;
+
+}
+
+
+#itemProduct,
+#itemDescription{
+
+    margin-top:10px;
+
+    font-family:"SourceSans";
+
+    font-size:16px;
+
+    font-weight:500;
+
+    color:black;
+
+}
+
+
+#itemPrice{
+
+    margin-top:10px;
+
+    font-family:"SourceSans";
+
+    font-size:18px;
+
+    font-weight:700;
+
+    color:black;
+
+}
+
 #permissionDialog{
 
     display:none;
+
+    position:absolute;
+
+    inset:0;
 
     width:100%;
     height:100%;
@@ -1298,6 +1452,8 @@ select,
     align-items:center;
 
     gap:24px;
+
+    z-index:3;
 
 }
 
@@ -1338,5 +1494,153 @@ select,
     font-weight:900;
 
     cursor:pointer;
+
+}
+
+#itemPhoto{
+
+    display:block;
+
+    width:220px;
+
+    height:220px;
+
+    margin:20px auto 15px auto;
+
+    object-fit:contain;
+
+    border-radius:8px;
+
+}
+
+/* ---------- SCANNING STATE ELEMENTS ---------- */
+
+#backButton{
+
+    display:none;
+
+    position:absolute;
+
+    left:50%;
+
+    top:303px;
+
+    transform:translateX(-50%);
+
+    width:33%;
+
+    height:30px;
+
+    border:3px solid black;
+
+    border-radius:8px;
+
+    background:var(--dark-grey);
+
+    color:white;
+
+    font-family:"Emily";
+
+    font-size:15px;
+
+    font-weight:900;
+
+    -webkit-text-stroke:0.4px black;
+
+    cursor:pointer;
+
+    z-index:110;
+
+}
+
+
+#cameraInstruction{
+
+    display:none;
+
+    position:absolute;
+
+    top:18px;
+
+    left:0;
+
+    width:100%;
+
+    text-align:center;
+
+    color:black;
+
+    font-family:"Emily";
+
+    font-size:18px;
+
+    line-height:1.3;
+
+    z-index:105;
+
+}
+
+/* ---------- SUCCESS SCREEN ---------- */
+
+#successPanel{
+
+    display:none;
+
+    position:absolute;
+
+    inset:0;
+
+    background:white;
+
+    border-radius:12px;
+
+    z-index:4;
+
+    text-align:center;
+
+}
+
+
+#successTitle{
+
+    margin-top:42px;
+
+    font-family:"SourceSans";
+
+    font-size:18px;
+
+    font-weight:500;
+
+    color:black;
+
+}
+
+
+#successID{
+
+    margin-top:24px;
+
+    font-family:"SourceSans";
+
+    font-size:24px;
+
+    font-weight:900;
+
+    color:black;
+
+}
+
+
+#successText{
+
+    margin-top:24px;
+
+    font-family:"SourceSans";
+
+    font-size:18px;
+
+    font-weight:500;
+
+    color:black;
 
 }
