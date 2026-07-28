@@ -8,7 +8,7 @@
 
 let products = [];
 
-fetch("../public_data/products.json")
+fetch("../../public_data/products.json")
     .then(response => response.json())
     .then(data => {
 
@@ -38,6 +38,7 @@ let discount = null;
 
 // Current order
 let currentOrder = null;
+let currentItem = null;
 
 /* ---------- ACTIVATION VEIL ---------- */
 
@@ -66,6 +67,7 @@ if (scanButton && topVeil && bottomVeil){
         bottomVeil.style.display = "block";
 
         document.getElementById("permissionDialog").style.display = "flex";
+        document.getElementById("backButton").style.display = "block";
 
         document.getElementById("allowCameraButton").onclick = async () => {
 
@@ -97,7 +99,26 @@ if (scanButton && topVeil && bottomVeil){
 
         placeholder.appendChild(camera);
 
+        document.getElementById("scanButton").style.visibility = "hidden";
+
+        document.getElementById("cameraInstruction").style.display = "block";
+
         console.log("Camera successfully attached.");
+
+setTimeout(() => {
+
+    document.getElementById("cameraInstruction").style.display = "none";
+
+    currentItem = findItem("TM000001");
+
+    console.log(currentItem);
+
+    showSuccess(currentItem["Item ID"]);
+
+    showItemState();
+
+}, 2000);
+
 
     }
 
@@ -111,6 +132,66 @@ if (scanButton && topVeil && bottomVeil){
 };
 
     });
+
+}
+
+function showSuccess(itemID){
+
+    if(cameraStream){
+
+        cameraStream.getTracks().forEach(track => track.stop());
+
+        cameraStream = null;
+
+    }
+
+
+    const camera = document.querySelector("#cameraPlaceholder video");
+
+    if(camera){
+
+        camera.remove();
+
+    }
+
+
+    document.getElementById("cameraPlaceholder").style.background = "white";
+
+    document.getElementById("successID").textContent = itemID;
+
+    document.getElementById("successPanel").style.display = "block";
+
+    document.getElementById("itemPanel").style.display = "none";
+
+    document.getElementById("scanItemID").style.display = "none";
+
+    document.getElementById("scanCompliment").style.display = "none";
+
+    document.getElementById("itemButtons").style.display = "none";
+
+}
+
+function showItemState(){
+
+    setTimeout(() => {
+
+        document.getElementById("successPanel").style.display = "none";
+
+        document.getElementById("scanItemID").style.display = "block";
+
+        document.getElementById("scanCompliment").style.display = "block";
+
+        document.getElementById("itemPanel").style.display = "block";
+
+        document.getElementById("itemButtons").style.display = "flex";
+
+    }, 2000);
+
+}
+
+function findItem(itemID){
+
+    return products.find(item => item["Item ID"] === itemID);
 
 }
 
@@ -151,6 +232,60 @@ if (pageDownButton){
 
 }
 
+document.getElementById("backButton").onclick = () => {
+
+    if(cameraStream){
+
+        cameraStream.getTracks().forEach(track => track.stop());
+
+        cameraStream = null;
+
+    }
+
+    document.getElementById("cameraPlaceholder").innerHTML = `
+
+        <div id="permissionDialog">
+
+            <p>
+                Allow access<br>
+                to your camera?
+            </p>
+
+            <button id="allowCameraButton">
+
+                SURE!
+
+            </button>
+
+        </div>
+
+    `;
+
+    document.getElementById("cameraPlaceholder").style.background = "rgba(0,0,0,0.50)";
+    document.getElementById("successPanel").style.display = "none";
+    document.getElementById("itemPanel").style.display = "none";
+    document.getElementById("scanItemID").style.display = "none";
+
+    document.getElementById("scanCompliment").style.display = "none";
+
+    document.getElementById("itemButtons").style.display = "none";
+
+    document.getElementById("permissionDialog").style.display = "none";
+
+    document.getElementById("backButton").style.display = "none";
+
+    topVeil.style.display = "none";
+    bottomVeil.style.display = "none";
+
+    document.getElementById("cameraInstruction").style.display = "none";
+    document.getElementById("successPanel").style.display = "none";
+
+    document.getElementById("scanButton").style.visibility = "visible";
+
+
+    document.getElementById("allowCameraButton").onclick = scanButton.onclick;
+
+};
 
 /* ============================================================
    BELOW IS THE OLD PROTOTYPE.
