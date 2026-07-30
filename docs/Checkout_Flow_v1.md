@@ -455,3 +455,101 @@ Then BACK would simply call:
 cancelAllTimers();
 
 instead of remembering every individual timeout. It'll make the code much cleaner and prevent exactly this type of bug as more states are added.
+
+===========================================================================
+Proof-of-purchase screen. 
+After the user got payment instructions - according to the chosen payment method (easy copy-paste option!)- they MUST submit a screenshot about payment where at least their NAME/and or item ID (message field) is visible!
+Here are the options.
+***Option 1 — No email verification (my preference for your showroom)
+
+Customer enters:
+
+Name
+Email
+
+The system checks only that the email looks valid (contains @, a domain, etc.).
+
+Pros
+Fast checkout.
+No interruptions.
+No internet dependency beyond opening the checkout page.
+No risk of customers abandoning the purchase because they don't want to open their inbox.
+
+Cons
+They can mistype the email.
+If payment is missing or incorrect, you may not be able to contact them.
+***Option 2 — Verification email (one-time code or link)
+
+Customer must verify the email before paying.
+
+Pros
+
+You know the email is real.
+Easier to contact them later.
+Better if you automatically issue receipts or manage accounts.
+
+Cons
+
+Adds friction.
+Some customers will abandon the purchase.
+Requires an email-sending backend and verification logic.
+More moving parts to maintain.
+
+***Option 3 — My favorite compromise
+
+Keep the checkout simple.
+
+After the customer presses PAY, show a confirmation screen like:
+
+Payment instructions have been prepared.
+
+Receipt will be sent to:
+
+john.smith@email.com
+
+Is this correct?
+
+CHANGE EMAIL | CONTINUE
+
+This catches a surprising number of typos because people notice mistakes when their address is displayed prominently.
+
+Then, after payment proof is submitted, you send the receipt. If the email bounces, you still have:
+
+the customer's name,
+the payment screenshot,
+the payment timestamp,
+and (if applicable) the payer name from the payment itself.
+
+"I tend to agree...although it does implement financial risk for me...untill the first loss, I can keep your Option3...But in that message we have to find a catch, something that will make the user really want to submit the correct email, like it should be important for them...e.g. 'any financial claim from a different email/name will not be considered legally' or so"
+I think you're on the right track by making the customer understand why the email matters, but I'd avoid wording that sounds like a legal threat unless it's actually backed by your terms and applicable law. A statement like:
+
+"Any financial claim from a different email/name will not be considered legally."
+
+could create legal issues if, in reality, you'd still be required to handle a legitimate customer inquiry.
+
+Instead, you can make the incentive practical and truthful.
+
+For example:
+
+Please check your email carefully.
+
+Your receipt, payment confirmation, and any questions regarding this order will be sent to this address. If the email is incorrect, we may be unable to contact you regarding your purchase.
+
+Or a stronger version:
+
+Please make sure your email is correct.
+
+This email address will be used as the primary contact for this order, including your receipt and any payment-related communication. An incorrect email may delay or prevent us from resolving issues with your order.
+
+If you want to encourage careful checking without sounding hostile, you could even add:
+
+Take a moment to check it now—it only takes a second and can save a lot of hassle later.
+
+For Tango Mermaid, I think the strongest motivation isn't a warning—it's tying the email to something the customer wants:
+
+their receipt,
+confirmation that their payment was received,
+updates if there's any issue,
+and, if they opt in, TM Club benefits.
+
+That gives them a positive reason to enter it correctly, while also making it clear that an incorrect address limits your ability to help if something goes wrong.
