@@ -553,3 +553,74 @@ updates if there's any issue,
 and, if they opt in, TM Club benefits.
 
 That gives them a positive reason to enter it correctly, while also making it clear that an incorrect address limits your ability to help if something goes wrong.
+===================================================================================================================
+Payment pscreens/procedure
+
+
+────────────────────────────
+
+PAY FOR YOUR ORDER
+
+Please copy the information below and complete the payment in your selected payment app.
+
+When the payment is complete, take a screenshot. You will be asked to submit it on the next screen.
+
+Please make sure the screenshot clearly shows:
+
+• the Order number (message)
+• the paid amount
+
+────────────────────────────
+
+Recipient
+Tango Mermaid                            [📋]
+
+IBAN
+FIxx xxxx xxxx xxxx xx                  [📋]
+
+BIC
+XXXXXXXX                                [📋]
+
+Amount
+€85.00                                  [📋]
+
+Order number (Message)
+48371                                   [📋]
+
+────────────────────────────
+
+☐ I hereby declare that I have completed the above payment in full and that the submitted screenshot is a true and accurate proof of this payment.
+
+                [ I HAVE PAID ]
+
+
+Then:
+
+SUBMIT PAYMENT SCREENSHOT
+
+Drag & Drop
+
+or
+
+Choose File
+
+[image preview]
+
+         [ SUBMIT SCREENSHOT ]
+
+
+===============================================================================================================
+Order numbering
+We'll generate a 5-digit numeric order number, for example:
+
+48371
+10582
+77419
+03284
+
+No TM prefix, so it cannot be confused with your product IDs (TM000123).
+
+===============================================================================================================
+Declaration checkbox on I PAID
+
+"I hereby declare that I have completed the above payment in full and that the submitted screenshot is a true and accurate proof of the payment."
