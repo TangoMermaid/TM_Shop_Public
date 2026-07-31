@@ -63,3 +63,67 @@ It's perfectly acceptable if on a shorter phone the user needs to scroll a littl
 I would add red fold lines every 844 px and simply ignore the exact position on individual devices. If the design looks good against those guides, it will look good on almost any modern phone.
 
 I think your idea of permanent fold guides is excellent. They will make the rest of the project much easier.
+
+
+
+=======================================================
+Your hybrid idea
+
+I think this is the sweet spot.
+
+paymentPanel
+│
+├── header (fixed)
+├── instructions (fixed)
+├── paymentBlockContainer
+│      │
+│      ├── bankTransferBlock
+│      ├── paypalBlock
+│      ├── mobilePayBlock
+│      └── ...
+├── declaration (fixed)
+├── button (fixed)
+└── footer (fixed)
+
+When the user chooses:
+
+Bank transfer
+
+only this becomes visible:
+
+bankTransferBlock
+
+Everything else stays untouched.
+
+Even better...
+
+I wouldn't even remove the inactive blocks.
+
+I'd simply do:
+
+display:none;
+
+and
+
+display:block;
+
+So the JS becomes almost trivial:
+
+hideAllPaymentBlocks();
+
+bankTransferBlock.style.display = "block";
+
+That's robust, easy to debug, and if you ever add a new payment method, you only create one new beige block and one line to show it.
+
+I think this is the best architecture we've designed so far.
+
+It follows the same philosophy you've been using throughout the project:
+
+one responsibility per component,
+minimal JavaScript,
+mostly HTML/CSS,
+easy to duplicate,
+low risk when changing one payment method,
+and a stable outer shell that rarely needs editing.
+
+I don't think I'd simplify it any further. It's a very maintainable structure for the unattended checkout you're building.
