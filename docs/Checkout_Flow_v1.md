@@ -622,5 +622,141 @@ No TM prefix, so it cannot be confused with your product IDs (TM000123).
 
 ===============================================================================================================
 Declaration checkbox on I PAID
-
 "I hereby declare that I have completed the above payment in full and that the submitted screenshot is a true and accurate proof of the payment."
+
+###############################
+CONNECTORS = architecture
+
+And I actually think one orders.json is a better fit for Tango Mermaid.
+
+Then the flow becomes:
+
+Netlify
+    ↓
+Read orders.json
+    ↓
+Last order = TM001258
+    ↓
+Create TM001259
+    ↓
+Append new order
+    ↓
+Write orders.json
+
+No separate counter.
+
+No duplicated information.
+
+The last order number is already there.
+
+Even better, the structure could simply be:
+
+[
+  {
+    "orderNumber": "TM000001",
+    ...
+  },
+  {
+    "orderNumber": "TM000002",
+    ...
+  },
+  {
+    "orderNumber": "TM000003",
+    ...
+  }
+]
+
+The next order is always:
+
+last.orderNumber + 1
+Advantages
+✅ Only one file to manage.
+✅ Easy to download as a backup.
+✅ Easy to search.
+✅ Easy to import into Excel or Power BI later.
+✅ No duplicated counter.
+My only suggestion
+
+Don't call it just:
+
+orders.json
+
+Make it future-proof, for example:
+
+orders_master.json
+
+or
+
+tm_orders.json
+
+because later you may have:
+
+products.json
+customers.json
+receipts.json
+
+and the names stay unambiguous.
+
+I actually like this architecture better than what I suggested earlier. It matches your expected business volume much better and keeps everything simple. If, years from now, Tango Mermaid reaches tens of thousands of orders, migrating from one JSON file to a database would still be straightforward.
+
+what do I need to connect to Netlify and GH pages?
+
+Very little, actually. That's one reason I liked the GitHub Pages + Netlify combination for Tango Mermaid.
+
+You'll need:
+
+Your GitHub account (already have)
+Public repository → website (GitHub Pages)
+Private repository → orders and payment screenshots
+A Netlify account (free)
+Connect Netlify to GitHub
+Authorize Netlify to access your GitHub account.
+Select the repository (or repositories) it needs access to.
+A Netlify Function
+This is a small JavaScript file (or TypeScript if you prefer).
+It receives:
+the order JSON,
+the screenshot,
+then:
+reads orders.json,
+generates the next order number,
+appends the order,
+uploads the screenshot,
+commits everything to the private GitHub repository,
+optionally sends emails.
+A GitHub Personal Access Token (PAT)
+This lets the Netlify Function write to your private repository.
+It is stored only in Netlify's environment variables, never in your checkout code.
+The important security point
+
+The token is stored like this:
+
+Netlify Environment Variables
+--------------------------------
+GITHUB_TOKEN = *************
+
+Your customer never sees it.
+
+Your checkout.js never contains it.
+
+Your current website
+
+Nothing changes.
+
+It remains:
+
+Customer
+     ↓
+GitHub Pages
+
+Only the last step changes:
+
+Instead of:
+
+// TODO save order
+
+you'll later have:
+
+submitOrder(order, screenshot);
+
+which sends the data to Netlify.
