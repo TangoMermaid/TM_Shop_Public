@@ -94,3 +94,50 @@ customer contacted
 That will become your "to-do" field, which is probably the most useful field in the whole file.
 
 Overall, I think this model is very well suited to Tango Mermaid. I wouldn't add anything else before implementing it. The next step is to make the checkout populate exactly these fields and let the Netlify bridge append them to your orders.json.
+
+
+Since all orders will be stored in a single orders.json, I'd start it like this:
+
+[]
+
+When the first order arrives, it becomes:
+
+[
+  {
+    "order_nr": "",
+    "order_status": "",
+    "order_comment": "",
+    "when_opened": "",
+    "when_closed": "",
+
+    "cust_name": "",
+    "cust_email": "",
+    "cust_phone": "",
+    "tm_club": "",
+    "privacy_accepted": "",
+
+    "items_IDs": [],
+    "items_count": 0,
+    "subtotal": 0,
+    "campaign": "",
+    "discount": 0,
+    "total": 0,
+
+    "pay_method": "",
+    "pay_proof_file": "",
+
+    "when_confirm_sent": "",
+    "confirm_comments": "",
+
+    "when_receipt_sent": "",
+    "receipt_comments": ""
+  }
+]
+
+A couple of implementation notes (not schema changes):
+
+items_IDs is an array because an order can contain multiple items.
+Empty date/time fields start as "".
+Netlify will append a new object to this array for each new order.
+
+I think this is a clean, lightweight foundation that fits your workflow well.
