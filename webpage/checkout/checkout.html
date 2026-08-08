@@ -92,9 +92,19 @@
 
             <label class="paymentLabel">Payment method:</label>
 
-            <select class="paymentSelect">
+            <select id="paymentSelectTop" class="paymentSelect">
 
-                <option>Not chosen</option>
+                <option value="">Not chosen</option>
+
+                <option>Mobile Pay</option>
+
+                <option>Siirto</option>
+
+                <option>Bank transfer</option>
+
+                <option>PayPal</option>
+
+                <option class="cashOption">Cash - in person</option>
 
             </select>
 
@@ -113,6 +123,7 @@
 <div id="topVeil"></div>
 
 <div id="bottomVeil"></div>
+
 
 <!-- LOWER WORKSPACE -->
 
@@ -142,6 +153,19 @@
 </p>
 
 <!-- CAMERA PLACEHOLDER -->
+
+<p id="scanItemID">
+
+    TM000001
+
+</p>
+
+<p id="scanCompliment">
+
+    ✨ My, my...What a find!
+
+</p>
+
 
 <div id="scannerArea">
 
@@ -186,52 +210,42 @@
         </p>
 
     </div>
-<p id="scanItemID">
-
-    TM000001
-
-</p>
-
-<p id="scanCompliment">
-
-    ✨ My, my...What a find!
-
-</p>
 
 
-<div id="itemPanel">
+    <div id="itemPanel">
 
-    <img
-        id="itemPhoto"
-        src=""
-        alt="Item photo">
+        <img
+            id="itemPhoto"
+            src=""
+            alt="Item photo">
 
-    <p id="itemID">
+        <p id="itemInfoID">
 
-        Item ID: TM000001
+            Item ID: TM000001
 
-    </p>
+        </p>
 
-    <p id="itemProduct">
+        <p id="itemProduct">
 
-        Product: Apparel
+            Product: Apparel
 
-    </p>
+        </p>
 
-    <p id="itemDescription">
+        <p id="itemDescription">
 
-        Description: Pants
+            Description: Pants
 
-    </p>
+        </p>
 
-    <p id="itemPrice">
+        <p id="itemPrice">
 
-        Price: €40
+            Price: €40
 
-    </p>
+        </p>
+
+    </div>
 
 </div>
-
 
 <div id="itemButtons">
 
@@ -249,11 +263,43 @@
 
 </div>
 
+<div id="continueShoppingState">
+
+    <p id="continueMessage">
+
+        WELL DONE!<br>
+        TM000001<br>
+        IS NOW THE BASKET
+
+    </p>
+
+
+    <div id="continueScannerArea">
+
+        <p id="scanNextText">
+
+            Scan next?
+
+        </p>
+
+        <button id="scanNextButton">
+
+            NEXT!
+
+        </button>
 
     </div>
 
 
-    <!-- SOCIAL WATERMARK -->
+    <button id="continueBackButton">
+
+        BACK
+
+    </button>
+
+</div>
+
+<!-- SOCIAL WATERMARK -->
 
     <div id="socialWatermark">
 
@@ -286,6 +332,9 @@
         Nothing here yet. Hurry up and fill<br>
         your basket with treasures!
     </p>
+    <div id="basketItems">
+
+</div>
 
 </div>
 
@@ -309,9 +358,6 @@
 
         <div id="campaignDetails">
 
-            TEST LINE 1<br>
-            TEST LINE 2
-
         </div>
 
         <p><b>Discount applied:</b> -</p>
@@ -323,13 +369,23 @@
         <p><b>TOTAL:</b> <strong>0.00 €</strong></p>
         <br>
 
-<p class="paymentLabel">Payment method:</p>
+        <p class="paymentLabel">Payment method:</p>
 
-<select class="paymentSelect">
+        <select id="paymentSelectBottom" class="paymentSelect">
 
-    <option>Not chosen</option>
+            <option value="">Not chosen</option>
 
-</select>
+            <option>Mobile Pay</option>
+
+            <option>Siirto</option>
+
+            <option>Bank transfer</option>
+
+            <option>PayPal</option>
+
+            <option class="cashOption">Cash - in person</option>
+
+        </select>
 
     </div>
 
@@ -343,10 +399,17 @@
         Your name and email - for the receipt:
     </p>
 
-<textarea
-    id="receiptInput"
-    placeholder="Your full name please&#10;Your e-mail address"
-    disabled></textarea>
+<input
+    type="text"
+    id="customerName"
+    placeholder="Your full name"
+    autocomplete="name">
+
+<input
+    type="email"
+    id="customerEmail"
+    placeholder="Your e-mail address"
+    autocomplete="email">
 
     <label class="checkLine">
 
@@ -371,17 +434,716 @@
 
 </div>
 
+<div id="campaignNote">
+
+    <span class="noteStar">*</span>
+
+    <span class="noteText">
+        Only one campaign per order.<br>
+        Choose your biggest discount and type<br>
+        in discount code at the top of the page.
+    </span>
+
+</div>
+
+<div id="paymentArea">
+
+<div id="paymentMask"></div>
+
 <button id="payButton" disabled>
 
-    PAY
+    GO TO PAYMENT
 
 </button>
 
-<div id="campaignNote">
+<div id="paymentDetails" style="display:none;">
 
-    <span class="noteStar">*</span><span class="noteText">Only one campaign per order.<br>
-    Choose your biggest discount and type<br>
-    in discount code at the top of the page.</span>
+<div class="paymentHeader">
+
+    <h2 class="paymentHeading">
+
+        PAYMENT<br>
+        details & instructions
+
+    </h2>
+
+</div>
+
+<p class="paymentInstructions">
+
+    1. Copy these details into your <b>PAYMENT APP</b>.
+    <br><br>
+
+    2. When the payment is complete, take a <b>SCREENSHOT</b>.<br>
+    Make sure the <b>ORDER ID</b> is visible in the <b>MESSAGE</b> field.
+    <br><br>
+
+    3. <b>RETURN HERE</b> to submit the screenshot and
+    <b>FINISH YOUR ORDER</b>.
+
+</p>
+
+<div id="paymentMethodContainer">
+<div class="bankTransferBlock" style="display:block;">
+
+    <div class="paymentMethodTitle">
+
+        <span>Payment method:</span>
+
+        <strong>BANK TRANSFER</strong>
+
+    </div>
+
+    <div class="paymentRow">
+
+        <div class="paymentText">
+
+            <p>Amount:</p>
+
+            <strong>25.00 EUR</strong>
+
+        </div>
+
+        <img class="copyButton" src="../Page_elements/copy_button.png" alt="Copy">
+
+    </div>
+
+    <div class="paymentRow">
+
+        <div class="paymentText">
+
+            <p>Recipient:</p>
+
+            <strong>Darina Bunak</strong>
+
+        </div>
+
+        <img class="copyButton" src="../Page_elements/copy_button.png" alt="Copy">
+
+    </div>
+
+    <div class="paymentRow">
+
+        <div class="paymentText">
+
+            <p>IBAN:</p>
+
+            <strong>FI24 5731 6520 1438 29</strong>
+
+        </div>
+
+        <img class="copyButton" src="../Page_elements/copy_button.png" alt="Copy">
+
+    </div>
+
+    <div class="paymentRow">
+
+        <div class="paymentText">
+
+            <p>Reference:</p>
+
+            <strong>[leave empty]</strong>
+
+        </div>
+
+    </div>
+
+    <div class="paymentRow">
+
+        <div class="paymentText">
+
+            <p>Message:</p>
+
+            <strong>12345, for TM</strong>
+
+        </div>
+
+        <img class="copyButton" src="../Page_elements/copy_button.png" alt="Copy">
+
+    </div>
+
+    <div class="paymentRow">
+
+        <div class="paymentText">
+
+            <p>Bank name:</p>
+
+            <strong>Osuuspankki</strong>
+
+        </div>
+
+        <img class="copyButton"
+            src="../Page_elements/copy_button.png"
+            alt="Copy">
+
+    </div>
+
+    <div class="paymentRow">
+
+        <div class="paymentText">
+
+            <p>BIC / SWIFT:</p>
+
+            <strong>OKOYFIHH</strong>
+
+        </div>
+
+        <img class="copyButton" src="../Page_elements/copy_button.png" alt="Copy">
+
+    </div>
+
+    <div class="paymentRow">
+
+        <div class="paymentText">
+
+            <p>Recipient address:</p>
+
+            <strong>Kaskilaaksontie 4B, Espoo</strong>
+
+        </div>
+
+        <img class="copyButton"
+            src="../Page_elements/copy_button.png"
+            alt="Copy">
+
+    </div>
+
+    <div class="paymentRow">
+
+        <div class="paymentText">
+
+            <p>Bank address:</p>
+
+            <strong>Gebhardinaukio 1, FI-00510 Helsinki, Finland. OP Corporate Bank plc</strong>
+
+        </div>
+
+        <img class="copyButton"
+            src="../Page_elements/copy_button.png"
+            alt="Copy">
+
+    </div>
+
+</div>
+
+<!-- MOBILE PAY -->
+
+<div class="mobilePayBlock" style="display:none;">
+
+    <div class="paymentMethodTitle">
+
+        <span>Payment method:</span>
+
+        <strong>MOBILE PAY</strong>
+
+    </div>
+
+    <div class="paymentRow">
+
+        <div class="paymentText">
+
+            <p>Amount:</p>
+
+            <strong>25.00 EUR</strong>
+
+        </div>
+
+        <img class="copyButton" src="../Page_elements/copy_button.png" alt="Copy">
+
+    </div>
+
+    <div class="paymentRow">
+
+        <div class="paymentText">
+
+            <p>Name:</p>
+
+            <strong>Darina Bunak</strong>
+
+        </div>
+
+        <img class="copyButton" src="../Page_elements/copy_button.png" alt="Copy">
+
+    </div>
+
+    <div class="paymentRow">
+
+        <div class="paymentText">
+
+            <p>Mobile phone:</p>
+
+            <strong>+358 413139325</strong>
+
+        </div>
+
+        <img class="copyButton" src="../Page_elements/copy_button.png" alt="Copy">
+
+    </div>
+
+    <div class="paymentRow">
+
+        <div class="paymentText">
+
+            <p>Message:</p>
+
+            <strong>12345, for TM</strong>
+
+        </div>
+
+        <img class="copyButton" src="../Page_elements/copy_button.png" alt="Copy">
+
+    </div>
+
+</div>
+
+<!-- SIIRTO -->
+
+<div class="siirtoBlock" style="display:none;">
+
+    <div class="paymentMethodTitle">
+
+        <span>Payment method:</span>
+
+        <strong>SIIRTO</strong>
+
+    </div>
+
+    <div class="paymentRow">
+
+        <div class="paymentText">
+
+            <p>Amount:</p>
+
+            <strong>25.00 EUR</strong>
+
+        </div>
+
+        <img class="copyButton" src="../Page_elements/copy_button.png" alt="Copy">
+
+    </div>
+
+    <div class="paymentRow">
+
+        <div class="paymentText">
+
+            <p>Name:</p>
+
+            <strong>Darina Bunak</strong>
+
+        </div>
+
+        <img class="copyButton" src="../Page_elements/copy_button.png" alt="Copy">
+
+    </div>
+
+    <div class="paymentRow">
+
+        <div class="paymentText">
+
+            <p>Mobile phone:</p>
+
+            <strong>+358 413139325</strong>
+
+        </div>
+
+        <img class="copyButton" src="../Page_elements/copy_button.png" alt="Copy">
+
+    </div>
+
+    <div class="paymentRow">
+
+        <div class="paymentText">
+
+            <p>Reference:</p>
+
+            <strong>[leave empty]</strong>
+
+        </div>
+
+    </div>
+
+    <div class="paymentRow">
+
+        <div class="paymentText">
+
+            <p>Message:</p>
+
+            <strong>12345, for TM</strong>
+
+        </div>
+
+        <img class="copyButton" src="../Page_elements/copy_button.png" alt="Copy">
+
+    </div>
+
+</div>
+
+<!-- PAYPAL -->
+
+<div class="paypalBlock" style="display:none;">
+
+    <div class="paymentMethodTitle">
+
+        <span>Payment method:</span>
+
+        <strong>PAYPAL</strong>
+
+    </div>
+
+    <div class="paymentRow">
+
+        <div class="paymentText">
+
+            <p>Amount:</p>
+
+            <strong>25.00 EUR</strong>
+
+        </div>
+
+        <img class="copyButton" src="../Page_elements/copy_button.png" alt="Copy">
+
+    </div>
+
+    <div class="paymentRow">
+
+        <div class="paymentText">
+
+            <p>Name:</p>
+
+            <strong>Darina Bunak</strong>
+
+        </div>
+
+        <img class="copyButton" src="../Page_elements/copy_button.png" alt="Copy">
+
+    </div>
+
+    <div class="paymentRow">
+
+        <div class="paymentText">
+
+            <p>Email address:</p>
+
+            <strong>darina.o.bunak@gmail.com</strong>
+
+        </div>
+
+        <img class="copyButton" src="../Page_elements/copy_button.png" alt="Copy">
+
+    </div>
+
+    <div class="paymentRow">
+
+        <div class="paymentText">
+
+            <p>Mobile phone:</p>
+
+            <strong>+358 413139325</strong>
+
+        </div>
+
+        <img class="copyButton" src="../Page_elements/copy_button.png" alt="Copy">
+
+    </div>
+
+    <div class="paymentRow">
+
+        <div class="paymentText">
+
+            <p>@username:</p>
+
+            <strong>@DarinaBunak</strong>
+
+        </div>
+
+        <img class="copyButton" src="../Page_elements/copy_button.png" alt="Copy">
+
+    </div>
+
+    <div class="paymentRow">
+
+        <div class="paymentText">
+
+            <p>Payment type:</p>
+
+            <strong>Goods and Services</strong>
+
+        </div>
+
+        <img class="copyButton"
+            src="../Page_elements/copy_button.png"
+            alt="Copy">
+
+    </div>
+
+    <div class="paymentRow">
+
+        <div class="paymentText">
+
+            <p>Message:</p>
+
+            <strong>12345, for TM</strong>
+
+        </div>
+
+        <img class="copyButton" src="../Page_elements/copy_button.png" alt="Copy">
+
+    </div>
+
+</div>
+
+</div>
+
+<div id="receiptHeader" style="display:none;">
+
+    <div class="receiptHeaderTitle">
+
+        Please CAREFULLY check<br>
+        the information below
+
+    </div>
+
+</div>
+
+<div id="receiptSummary" style="display:none;">
+
+    <p>
+
+        <strong>Please carefully check the information below.</strong>
+
+    </p>
+
+    <p>
+
+        Items: TM000001, TM000023, TM000045, TM000071, TM000094
+
+    </p>
+
+    <p>
+
+        Customer's name:
+        <strong>Darina Bunak</strong>
+
+    </p>
+
+    <p>
+
+        Customer's email:
+        <strong>darina@example.com</strong>
+
+    </p>
+
+</div>
+
+<div id="receiptCompletedMessage" style="display:none;">
+
+    <p>
+        My dear Customer,
+    </p>
+
+    <p>
+        Your ORDER CONFIRMATION has been successfully submitted for processing and a copy of it will be sent to the email address you provided.
+    </p>
+
+    <p>
+        <b>Once your payment has been received and verified, a corresponding RECEIPT will be issued and sent to the same email address.</b>
+    </p>
+
+    <p>
+        If there is any issue with your order or payment, Tango Mermaid will contact you by email.
+    </p>
+
+    <p>
+        Please keep in mind that only your RECEIPT is the official proof of purchase.
+    </p>
+
+    <p class="receiptClosing">
+        Cannot wait to see you again,
+        Tango Mermaid
+    </p>
+
+</div>
+
+<div id="receiptConfirmation" style="display:none;">
+    <h2 id="receiptDocumentTitle">
+
+        ORDER CONFIRMATION
+
+    </h2>
+
+    <div id="receiptTopRow">
+
+        <span id="receiptTimestamp">
+
+            03 Aug 2026, 21:18
+
+        </span>
+
+        <div id="receiptOrderBlock">
+
+            <span class="receiptTextLabel">
+
+                Order ID:
+
+            </span>
+
+            <strong id="receiptOrderID">
+
+                12345
+
+            </strong>
+
+        </div>
+
+    </div>
+
+    <div class="receiptRow">
+
+        <div class="receiptText">
+
+            <p>Payment method:</p>
+
+            <strong id="receiptPaymentMethod">
+
+                Mobile Pay
+
+            </strong>
+
+        </div>
+
+    </div>
+
+    <div class="receiptRow">
+
+        <div class="receiptText">
+
+            <p>Amount:</p>
+
+            <strong id="receiptAmount">
+
+                85.00 EUR
+
+            </strong>
+
+        </div>
+
+    </div>
+
+    <div class="receiptRow">
+
+        <div class="receiptText">
+
+            <p>Customer's name:</p>
+
+            <strong id="receiptCustomer">
+
+                Darina Bunak
+
+            </strong>
+
+        </div>
+
+    </div>
+
+    <div class="receiptRow">
+
+        <div class="receiptText">
+
+            <p>Customer's email:</p>
+
+            <strong id="receiptEmail">
+
+                darina@example.com
+
+            </strong>
+
+        </div>
+
+    </div>
+
+    <div class="receiptItems">
+
+        <strong>
+
+            Items:
+
+        </strong>
+
+        <p id="receiptItems">
+
+            TM000001, TM000014, TM000023, TM000035, TM000041<br>
+            TM000052, TM000067, TM000081, TM000099<br>
+            TM000104, TM000117
+
+        </p>
+
+    </div>
+
+<div class="receiptUpload">
+
+    <span class="receiptLabel">
+
+        Payment proof:
+
+    </span>
+
+    <button id="chooseReceiptButton">
+
+        Choose screenshot
+
+    </button>
+
+    <input
+        type="file"
+        id="receiptFile"
+        accept="image/*"
+        style="display:none;">
+
+</div>
+
+    <label id="receiptConfirmLine">
+
+        <input
+            type="checkbox"
+            id="receiptEmailConfirm">
+
+    <span>
+
+        I confirm that all the displayed information (including<br>
+        Customer details and the Payment proof) is correct, and<br>
+        that I want my receipt sent to the email address above.
+
+    </span>
+
+</label>
+
+</div>
+
+<button id="completeOrderButton" disabled>
+
+    COMPLETE MY ORDER
+
+</button>
+
+<button id="receiptBackButton">
+
+    BACK
+
+</button>
+<button id="paidButton">
+
+    I HAVE PAID →<br>
+    SUBMIT SCREENSHOT
+
+</button>
+
+<button id="paymentBackButton">
+
+    BACK
+
+</button>
+
+</div>
 
 </div>
 
