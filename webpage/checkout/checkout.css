@@ -65,7 +65,7 @@ body{
 
     border-radius:24px;
 
-    overflow:hidden;
+    overflow:visible;
 
     padding:27px;
 
@@ -292,6 +292,12 @@ select,
 
 }
 
+.cashOption{
+
+    color:var(--dark-grey);
+
+}
+
 input::placeholder{
 
     color:var(--beige);
@@ -339,7 +345,7 @@ select,
 
 #checkoutButton,
 #payButton{
-
+    
     width:95%;
 
     height:48px;
@@ -360,7 +366,21 @@ select,
 
     font-weight:900;
 
-    margin-top:20px;
+    margin-top:15px;
+    
+
+}
+
+#checkoutButton:enabled,
+#payButton:enabled{
+
+    background:var(--blue);
+
+    color:var(--black);
+
+    border-color:black;
+
+    cursor:pointer;
 
 }
 
@@ -388,7 +408,107 @@ select,
 
 }
 
+#allowCameraButton{
+
+    width:140px;
+
+    height:48px;
+
+    background:var(--blue);
+
+    color:black;
+
+    border:3px solid black;
+
+    border-radius:8px;
+
+    font-family:"SourceSans";
+
+    font-size:15px;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+}
+
+#paymentBackButton{
+
+    display:block;
+
+    width:140px;
+
+    height:30px;
+
+    margin:18px auto 12px auto;
+
+    border:3px solid black;
+
+    border-radius:8px;
+
+    background:var(--dark-grey);
+
+    color:white;
+
+    font-family:"Emily";
+
+    font-size:15px;
+
+    font-weight:900;
+
+    -webkit-text-stroke:0.4px black;
+
+    cursor:pointer;
+
+}
+
+#paidButton{
+
+    display:block;
+
+    width:70%;
+
+    height:46px;
+
+    margin:80px auto 10px auto;
+
+    border:3px solid black;
+
+    border-radius:8px;
+
+    background:var(--blue);
+
+    color:var(--beige);
+
+    font-family:"Emily";
+
+    font-size:14px;
+
+    font-weight:400;
+
+    -webkit-text-stroke:0.4px black;
+
+    cursor:pointer;
+
+    margin-top:15px;
+
+}
+
+.paymentValueRow{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:8px;
+
+}
+
+
 #payButton{
+    display:none;
 
     width:42%;
 
@@ -541,6 +661,70 @@ select,
 
 }
 
+#scanItemID,
+#scanCompliment{
+
+    position:absolute;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:208px;
+
+    text-align:center;
+
+    z-index:5;
+
+}
+
+
+#scanItemID{
+
+    top:-5px;
+
+    background:var(--light-beige);
+
+    border:2px solid black;
+
+    border-radius:4px;
+
+    padding:3px 5px;
+
+    font-family:"SourceSans";
+
+    font-size:18px;
+
+    font-weight:700;
+
+    color:black;
+
+    text-align:center;
+
+}
+
+
+#scanItemID::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:12px;
+
+    right:12px;
+
+    bottom:4px;
+
+    height:18px;
+
+    background:var(--blue);
+
+    z-index:-1;
+
+}
+
+
 /* ---------- LOWER DIVIDERS ---------- */
 
 #lowerDividerBeige{
@@ -557,7 +741,7 @@ select,
 
     background:var(--beige);
 
-    z-index:3;
+    z-index:0;
 
 }
 
@@ -575,7 +759,7 @@ select,
 
     background:var(--black);
 
-    z-index:3;
+    z-index:0;
 
 }
 
@@ -605,7 +789,7 @@ select,
 
     letter-spacing:3px;
 
-    margin-bottom:50px;
+    margin-bottom:15px;
 
 }
 
@@ -833,9 +1017,95 @@ select,
 
 }
 
+/* ---------- BASKET ROW ---------- */
+
+#basketItems{
+
+    margin-top:18;
+
+    height:235px;
+
+    overflow-y:auto;
+
+    overflow-x:hidden;
+
+    padding-right:0px;
+
+    padding-left:28px;
+
+}
+
+.basketRow{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:0px;
+
+    min-height:76px;
+
+    margin-bottom:10px;
+
+}
+
+.basketPhoto{
+
+    width:70px;
+
+    height:70px;
+
+    object-fit:cover;
+
+    border-radius:8px;
+
+    flex-shrink:0;
+
+}
+
+.basketInfo{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:flex-start;
+
+    margin-left:18px;
+
+    font-family:"SourceSans";
+
+    font-size:12px;
+
+    line-height:1.25;
+
+}
+
+.basketDelete{
+
+    width:60px;
+
+    height:60px;
+
+    margin-right:14px;
+
+    cursor:pointer;
+
+    flex-shrink:0;
+
+    object-fit:contain;
+
+}
+
 /* ---------- RECEIPT DETAILS ---------- */
 
 #receiptDetails{
+
+    display:none;
 
     margin-top:10px;
 
@@ -856,64 +1126,50 @@ select,
 
 }
 
-#receiptInput{
+#customerName,
+#customerEmail{
 
     width:100%;
 
-    height:44px;
-
-    resize:none;
+    height:26px;
 
     background:var(--light-beige);
 
-    border:2px solid var(--black);
-
-    border-radius:8px;
+    border:0;
 
     font-family:"SourceSans";
-    font-style:italic;
 
-    font-size:12px;
+    font-size:14px;
 
-    font-weight:400;
+    font-weight:700;
 
-    color:var(--dark-grey);
+    color:var(--black);
 
     text-align:center;
 
-    padding:1.8px;
+    padding:0 12px;
 
-    line-height:1.4;
+    margin:0;
 
-    margin-bottom:6px;
+    box-sizing:border-box;
 
-}
-    
-
-
-
-#receiptInput::placeholder{
-
-    color:var(--dark-grey);
+    outline:none;
 
 }
 
+#customerName{
 
-#receiptInput:disabled{
+    border:2px solid var(--black);
 
-    opacity:1;
-
-}
-
-
-#receiptDetails input[type="text"]{
+    border-bottom:none;
 
     border-radius:8px 8px 0 0;
 
 }
 
+#customerEmail{
 
-#receiptDetails input[type="email"]{
+    border:2px solid var(--black);
 
     border-top:none;
 
@@ -921,7 +1177,20 @@ select,
 
 }
 
-#receiptDetails input:disabled{
+
+#customerName::placeholder,
+#customerEmail::placeholder{
+
+    color:var(--dark-grey);
+
+    font-style:italic;
+
+    font-weight:400;
+
+}
+
+#customerName:disabled,
+#customerEmail:disabled{
 
     opacity:1;
 
@@ -946,7 +1215,7 @@ select,
 
     font-weight:500;
 
-    margin-top:0px;
+    margin-top:8px;
     
     padding:0 30px;
 
@@ -963,15 +1232,42 @@ select,
 
     padding:0;
 
-    appearance:none;
-
-    -webkit-appearance:none;
+    appearance:auto;
+    -webkit-appearance:auto;
+    accent-color:var(--blue);
+    cursor:pointer;
 
     background:white;
 
     border:2px solid black;
 
     border-radius:3px;
+
+}
+
+#receiptConfirmLine input{
+
+    width:16px;
+
+    min-width:16px;
+
+    height:15px;
+
+    padding:0;
+
+    appearance:auto;
+    -webkit-appearance:auto;
+
+    accent-color:var(--blue);
+
+    cursor:pointer;
+
+    background:white;
+
+    border:2px solid black;
+
+    border-radius:3px;
+    
 
 }
 
@@ -989,6 +1285,7 @@ select,
 }
 
 #campaignNote{
+    display:none;
 
     width:70%;
 
@@ -1107,6 +1404,732 @@ select,
     margin:15;
 
     text-align:center;
+
+}
+
+#paymentArea{
+
+    position:relative;
+
+}
+
+#paymentMask{
+
+    display:none;
+
+    position:absolute;
+
+    left:0;
+
+    top:0;
+
+    width:calc(100% + 54px);
+
+    margin-left:-27px;
+
+    height:calc(100vh + 50px);
+
+    background:rgba(0,0,0,0.78);
+
+    z-index:100;
+
+    pointer-events:none;
+
+    border-radius:0;
+
+}
+
+#paymentDetails{
+
+    position:relative;
+
+    background:var(--light-beige);
+
+    width:calc(100% + 54px);
+
+    margin-left:-27px;
+
+    margin-top:40px;
+
+    padding-bottom:10px;
+
+}
+
+/* ---------- PAYMENT DETAILS ---------- */
+
+.paymentHeader{
+
+    width:100%;
+
+    margin-left:0;
+
+    background:var(--blue);
+
+    padding:8px 0;
+
+    text-align:center;
+    position:relative;
+
+}
+
+.paymentHeader::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-10px;
+
+    left:0;
+
+    width:100%;
+
+    height:5px;
+
+    background:var(--beige);
+
+    border-top:5px solid var(--black);
+
+}
+
+.paymentHeading{
+
+    margin:0;
+
+    font-family:"Emily";
+
+    font-size:18px;
+
+    font-weight:500;
+
+    line-height:1.15;
+
+    color:var(--black);
+
+}
+
+.paymentInstructions{
+
+    margin:15px 27px 18px;
+
+    text-align:left;
+
+    font-family:"SourceSans";
+
+    font-size:14px;
+
+    font-weight:500;
+
+    line-height:1.2;
+
+    color:var(--black);
+
+}
+
+.paymentMethodTitle{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:6px;
+
+    margin-bottom:10px;
+
+    font-family:"SourceSans";
+
+    font-size:11px;
+
+    font-weight:500;
+
+    color:black;
+
+}
+
+.paymentMethodTitle strong{
+
+    font-weight:700;
+
+}
+
+.bankTransferBlock,
+.mobilePayBlock,
+.siirtoBlock,
+.paypalBlock{
+
+    margin:0 27px;
+
+    padding:16px 18px;
+
+    background:var(--beige);
+
+    border-radius:12px;
+
+}
+
+.bankTransferBlock p,
+.mobilePayBlock p,
+.siirtoBlock p,
+.paypalBlock p{
+
+    margin:2px 0 1px;
+
+    font-family:"SourceSans";
+
+    font-size:11px;
+
+    font-weight:500;
+
+    color:var(--black);
+
+}
+
+.bankTransferBlock strong,
+.mobilePayBlock strong,
+.siirtoBlock strong,
+.paypalBlock strong{
+
+    display:block;
+
+    font-family:"SourceSans";
+
+    font-size:12px;
+
+    font-weight:700;
+
+    color:var(--black);
+
+}
+
+.paymentMethodLabel{
+
+    display:inline;
+
+    font-size:16px;
+
+    font-weight:500;
+
+    color:black;
+
+}
+
+.paymentMethodValue{
+
+    display:inline;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    color:black;
+
+}
+
+/* ---------- PAYMENT ROWS ---------- */
+
+.paymentRow{
+
+    position:relative;
+
+    padding-right:34px;
+
+    margin-bottom:8px;
+
+}
+
+.paymentRow:last-child{
+
+    margin-bottom:0;
+
+}
+
+/* ---------- COPY BUTTON ---------- */
+
+.copyButton{
+
+    position:absolute;
+
+    right:0;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    height:20px;
+
+    width:auto;
+
+    object-fit:contain;
+
+    cursor:pointer;
+
+}
+
+/* ---------- RECEIPT CONFIRMATION ---------- */
+
+#receiptConfirmation{
+
+    margin:12px 27px 0;
+
+    padding:16px 18px;
+
+    background:white;
+
+    border-radius:12px;
+
+    font-family:"SourceSans";
+
+    color:var(--black);
+
+}
+
+#receiptCompletedMessage{
+
+    margin:12px 27px 0;
+
+    padding:16px 18px;
+
+    background:white;
+
+    border-radius:12px;
+
+    font-family:"SourceSans";
+
+    color:var(--black);
+
+}
+
+
+#receiptDocumentTitle{
+
+    margin:0 0 14px;
+
+    text-align:center;
+
+    font-family:"SourceSans";
+
+    font-size:18px;
+
+    font-weight:700;
+
+    color:var(--black);
+
+}
+
+.receiptText p{
+
+    margin:0 0 -4px;
+
+    font-family:"SourceSans";
+
+    font-size:12px;
+
+    font-weight:500;
+
+    line-height:1.15;
+
+}
+
+.receiptRow{
+
+    display:flex;
+
+    align-items:baseline;
+
+    gap:8px;
+
+    margin-bottom:6px;
+
+}
+
+#receiptTopRow{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:baseline;
+
+    width:100%;
+
+    margin-bottom:6px;
+
+}
+
+#receiptOrderBlock{
+
+    display:flex;
+
+    align-items:baseline;
+
+    gap:4px;
+
+    margin-left:auto;
+
+}
+
+.receiptTextLabel{
+
+    font-family:"SourceSans";
+
+    font-size:12px;
+
+    font-weight:500;
+
+    line-height:1.15;
+
+}
+
+#receiptTimestamp{
+
+    font-family:"SourceSans";
+
+    font-size:14px;
+
+    font-weight:700;
+
+    line-height:1.8;
+
+}
+.receiptLabel{
+
+    font-size:13px;
+
+    font-weight:500;
+
+}
+
+#receiptConfirmation strong{
+
+    font-family:"SourceSans";
+
+    font-size:14px;
+
+    font-weight:700;
+
+    line-height:1.8;
+
+}
+
+#receiptTopRow{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:baseline;
+
+    margin-bottom:6px;
+
+}
+
+#receiptOrderBlock{
+
+    display:flex;
+
+    align-items:baseline;
+
+    gap:4px;
+
+}
+
+.receiptTextLabel{
+
+    font-family:"SourceSans";
+
+    font-size:12px;
+
+    font-weight:500;
+
+    line-height:1.15;
+
+}
+
+.receiptItems{
+
+    margin-top:8px;
+
+    font-size:10px;
+
+    line-height:1.35;
+
+}
+
+#receiptConfirmLine{
+
+    display:flex;
+
+    flex-direction:row-reverse;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    gap:6px;
+
+    margin-top:12px;
+
+}
+
+#receiptConfirmLine input{
+
+    width:18px;
+
+    height:18px;
+
+    margin-right:15px;
+
+    flex-shrink:0;
+
+}
+
+.receiptUpload{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:10px;
+
+    margin-bottom:10px;
+
+}
+
+.receiptUpload p{
+
+    margin:0;
+
+    font-family:"SourceSans";
+
+    font-size:14px;
+
+    font-weight:700;
+
+    line-height:1.8;
+
+}
+
+#receiptFileName{
+
+    min-height:34px;
+
+    padding:6px 8px;
+
+    background:var(--light-beige);
+
+    border-radius:8px;
+
+    font-size:10px;
+
+    line-height:1.3;
+
+    margin-bottom:8px;
+
+}
+
+#chooseReceiptButton{
+
+    min-width:145px;
+
+    height:28px;
+
+    padding:0 12px;
+
+    border:2px solid var(--black);
+
+    border-radius:8px;
+
+    background:var(--light-beige);
+
+    font-family:"SourceSans";
+
+    font-size:12px;
+
+    font-weight:500;
+
+    color:var(--black);
+
+    cursor:pointer;
+
+    transition:background .2s, border-color .2s;
+
+}
+
+#chooseReceiptButton.selected{
+
+    border:1px solid var(--blue);
+
+    font-weight:700;
+
+}
+
+#receiptConfirmLine span{
+
+    flex:1;
+
+    font-size:10px;
+
+    font-weight:700;
+
+    line-height:1.25;
+
+    text-align:left;
+
+}
+
+#completeOrderButton,
+#receiptBackButton{
+
+    display:block;
+
+    width:70%;
+
+    height:46px;
+
+    margin:15px auto 10px auto;
+
+    border:3px solid black;
+
+    border-radius:8px;
+
+    font-family:"Emily";
+
+    font-size:14px;
+
+    font-weight:400;
+
+    -webkit-text-stroke:0.4px black;
+
+    cursor:pointer;
+
+}
+
+#completeOrderButton{
+
+    background:var(--blue);
+
+    color:var(--beige);
+
+}
+
+#completeOrderButton:disabled{
+
+    background:var(--light-grey);
+
+    color:var(--dark-grey);
+
+    border-color:var(--dark-grey);
+
+    cursor:not-allowed;
+    -webkit-text-stroke:0.4px var(--dark-grey);
+
+}
+
+#receiptBackButton{
+
+    width:140px;
+
+    height:30px;
+
+    margin:8px auto 0 auto;
+
+    background:var(--dark-grey);
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:900;
+
+}
+
+
+
+/* ---------- RECEIPT HEADER ---------- */
+
+#receiptHeader{
+
+    margin:0;
+
+    padding:12px 27px;
+
+    background:var(--blue);
+
+    color:var(--black);
+
+    text-align:center;
+
+}
+
+.receiptHeaderTitle{
+
+    margin:0;
+
+    font-family:"Emily";
+
+    font-size:18px;
+
+    font-weight:500;
+
+    line-height:1.15;
+
+    color:var(--black);
+
+}
+
+.receiptHeaderInfo{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    font-family:"SourceSans";
+
+    font-size:11px;
+
+    font-weight:500;
+
+}
+
+/* ---------- RECEIPT SUMMARY ---------- */
+
+#receiptSummary{
+
+    margin:16px 27px 12px;
+
+    padding:12px 18px;
+
+    background:var(--light-beige);
+
+    border-radius:12px;
+
+    font-family:"SourceSans";
+
+    color:var(--black);
+
+}
+
+#receiptSummary p{
+
+    margin:0 0 6px;
+
+    font-size:11px;
+
+    line-height:1.35;
+
+}
+
+#receiptSummary strong{
+
+    font-size:12px;
+
+    font-weight:700;
 
 }
 
@@ -1344,10 +2367,107 @@ select,
 /* ---------- ITEM IDENTIFIED STATE ---------- */
 
 #scanItemID,
-#scanCompliment,
+#scanCompliment{
+
+    display:none;
+
+}
+
 #itemButtons{
 
     display:none;
+
+    width:208px;
+
+    margin:-24px auto 0 auto;
+
+    justify-content:space-between;
+
+    gap:16px;
+
+}
+
+#itemButtons.active{
+
+    display:flex;
+
+}
+
+
+#itemButtons button{
+
+    width:50%;
+
+    height:30px;
+
+    border:3px solid black;
+
+    border-radius:8px;
+
+    font-family:"Emily";
+
+    font-size:15px;
+
+    font-weight:900;
+
+    -webkit-text-stroke:0.4px black;
+
+    cursor:pointer;
+
+}
+
+
+#itemBackButton{
+
+    background:var(--dark-grey);
+
+    color:white;
+
+}
+
+
+#addItemButton{
+
+    background:var(--blue);
+
+    color:var(--light-beige);
+
+}
+
+#scanItemID{
+
+    margin-top:10px;
+
+    font-family:"SourceSans";
+
+    font-size:14px;
+
+    font-weight:700;
+
+    text-align:center;
+
+    margin-left:0px;
+
+}
+
+
+#scanCompliment{
+
+    margin-top:-15px;
+
+    font-family:"Emily";
+
+    font-size:18px;
+
+    font-weight:1400;
+
+    color: black;
+
+    -webkit-text-stroke:0.5px black;
+
+    text-align:center;
+
+    margin-left:-5px;
 
 }
 
@@ -1366,6 +2486,41 @@ select,
     z-index:4;
 
     text-align:center;
+
+}
+
+#itemPanel #scanItemID{
+
+    display:block !important;
+
+    margin-top:10px !important;
+
+    margin-left:15px !important;
+
+    text-align:left !important;
+
+    font-family:"SourceSans";
+
+    font-size:14px;
+
+    font-weight:700;
+
+}
+
+
+#itemPanel #scanCompliment{
+
+    display:block !important;
+
+    margin-left:15px !important;
+
+    text-align:left !important;
+
+    font-family:"SourceSans";
+
+    font-size:10px;
+
+    font-weight:500;
 
 }
 
@@ -1401,32 +2556,37 @@ select,
 
 
 #itemProduct,
-#itemDescription{
+#itemDescription,
+#itemPrice{
 
-    margin-top:10px;
+    margin-top:2px;
 
     font-family:"SourceSans";
 
-    font-size:16px;
+    font-size:8px;
 
     font-weight:500;
 
     color:black;
+
+    text-align:left;
 
 }
 
 
 #itemPrice{
 
-    margin-top:10px;
+    margin-top:2px;
 
     font-family:"SourceSans";
 
-    font-size:18px;
+    font-size:8px;
 
-    font-weight:700;
+    font-weight:500;
 
     color:black;
+
+    text-align:left;
 
 }
 
@@ -1501,11 +2661,11 @@ select,
 
     display:block;
 
-    width:220px;
+    width:120px;
 
-    height:220px;
+    height:120px;
 
-    margin:20px auto 15px auto;
+    margin:3px auto 3px auto;
 
     object-fit:contain;
 
@@ -1642,5 +2802,110 @@ select,
     font-weight:500;
 
     color:black;
+
+}
+
+#itemInfoID{
+
+    margin-top:0px;
+
+    font-family:"SourceSans";
+
+    font-size:8px;
+
+    font-weight:500;
+
+    color:black;
+
+    text-align:left;
+
+}
+
+#itemPanel{
+
+    padding-left:20px;
+    padding-right:20px;
+
+}
+
+
+#itemInfoID,
+#itemProduct,
+#itemDescription,
+#itemPrice{
+
+    margin-top:2px;
+
+    font-family:"SourceSans";
+
+    font-size:10px;
+
+    font-weight:500;
+
+    color:black;
+
+    text-align:left;
+
+}
+
+
+#itemInfoID{
+
+    margin-top:18px;
+
+    font-weight:500;
+
+}
+
+#continueShoppingState{
+
+    display:none;
+
+}
+
+#receiptCompletedMessage{
+
+    padding:16px 27px;
+
+    text-align:left;
+
+}
+
+#receiptCompletedMessage p{
+
+    margin:0 0 1px 0;
+
+    font-family:"SourceSans";
+
+    font-size:14px;
+
+    font-weight:600;
+
+    line-height:1.3;
+
+    color:var(--black);
+
+    white-space:pre-line;
+    letter-spacing: 1.1px;
+    text-align:justify;
+
+}
+
+#receiptCompletedMessage b{
+
+    font-weight:900;
+
+}
+
+#receiptCompletedMessage p.receiptClosing{
+
+    text-align:right;
+
+    font-style:italic;
+
+    line-height:1.3;
+        letter-spacing: 0.5px;
+
+    margin-top:18px !important;
 
 }
