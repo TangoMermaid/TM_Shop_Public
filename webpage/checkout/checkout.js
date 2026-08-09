@@ -8,7 +8,7 @@
 
 let products = [];
 
-fetch("../../public_data/products.json")
+fetch("../../products_public/products.json")
     .then(response => response.json())
     .then(data => {
 
