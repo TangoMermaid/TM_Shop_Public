@@ -1017,25 +1017,84 @@ document.getElementById("completeOrderButton").style.display = "none";
 
 document.getElementById("receiptBackButton").style.display = "none";
 
-document.getElementById("completeOrderButton").onclick = () => {
+document.getElementById("completeOrderButton").onclick = async () => {
 
     console.log("COMPLETE ORDER CLICKED");
 
-    document.querySelector(".paymentHeader").style.display = "none";
+    const order = {
+        cust_name: currentOrder.customerName,
+        cust_email: currentOrder.email,
+        tm_club: currentOrder.tmClub ? "yes" : "no",
+        privacy_accepted: "yes",
 
-    document.getElementById("receiptHeader").style.display = "block";
+        items_IDs: basket.map(item => item.getID()),
+        items_count: basketData.itemCount,
+        subtotal: basketData.sum,
+        campaign: basketData.campaign,
+        discount: basketData.discount,
+        total: basketData.total,
 
-    document.querySelector(".receiptHeaderTitle").textContent =
-        "THANK YOU!";
+        pay_method: currentOrder.paymentMethod,
 
-    document.getElementById("receiptConfirmation").style.display = "none";
+        pay_proof_file:
+            receiptFile.files.length > 0
+                ? receiptFile.files[0].name
+                : ""
+    };
 
-    document.getElementById("receiptCompletedMessage").style.display = "block";
-    document.getElementById("paymentDetails").style.background = "white";
+    console.log("Sending order:", order);
 
-    document.getElementById("completeOrderButton").style.display = "none";
+    try {
 
-    document.getElementById("receiptBackButton").style.display = "none";
+        const response = await fetch(
+            "/.netlify/functions/create-order",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(order)
+            }
+        );
+
+        const result = await response.json();
+
+        console.log("Order response:", result);
+
+        if (!response.ok || !result.success) {
+
+            alert("Something went wrong. Please try again.");
+
+            return;
+
+        }
+
+        document.querySelector(".paymentHeader").style.display = "none";
+
+        document.getElementById("receiptHeader").style.display = "block";
+
+        document.querySelector(".receiptHeaderTitle").textContent =
+            "THANK YOU!";
+
+        document.getElementById("receiptConfirmation").style.display = "none";
+
+        document.getElementById("receiptCompletedMessage").style.display = "block";
+
+        document.getElementById("paymentDetails").style.background = "white";
+
+        document.getElementById("completeOrderButton").style.display = "none";
+
+        document.getElementById("receiptBackButton").style.display = "none";
+
+    }
+
+    catch (error) {
+
+        console.error("Order submission failed:", error);
+
+        alert("Something went wrong. Please try again.");
+
+    }
 
 };
 
