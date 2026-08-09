@@ -443,7 +443,7 @@ class Item{
 
     getPhotoPath(){
 
-        return "../../item_photos/" +
+        return "../../../item_photos/" +
                this.getID() +
                ".jpg";
 
