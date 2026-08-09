@@ -8,20 +8,28 @@
 
 let products = [];
 
-fetch("../../products_public/products.json")
-    .then(response => response.json())
-    .then(data => {
+async function loadProducts(){
 
-        products = data;
+    try{
+
+        const response =
+            await fetch("../../products_public/products.json");
+
+        products = await response.json();
 
         console.log("Products loaded:", products.length);
 
-    })
-    .catch(error => {
+    }
+
+    catch(error){
 
         console.error("Cannot load products.json", error);
 
-    });
+    }
+
+}
+
+loadProducts();
 
 
 /* ---------- FUTURE VARIABLES ---------- */
