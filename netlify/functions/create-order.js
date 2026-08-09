@@ -96,22 +96,37 @@ exports.handler = async (event) => {
         });
 
         const now = new Date();
-
+        
+        const localNow =
+            new Date(
+                now.toLocaleString("en-US", {
+                    timeZone: "Europe/Helsinki"
+                })
+            );
+        
         const timePart =
-            String(now.getUTCHours()).padStart(2, "0") +
-            String(now.getUTCMinutes()).padStart(2, "0") +
-            String(now.getUTCSeconds()).padStart(2, "0") +
-            String(now.getUTCMilliseconds()).padStart(3, "0");
-
+            String(localNow.getHours()).padStart(2, "0") +
+            String(localNow.getMinutes()).padStart(2, "0") +
+            String(localNow.getSeconds()).padStart(2, "0") +
+            String(localNow.getMilliseconds()).padStart(3, "0");
+        
         const orderNumber =
             String(highestNumber + 1).padStart(5, "0") +
             "_" +
             timePart;
-
+        
         const whenOpened =
-            now.toISOString()
-                .replace("T", " ")
-                .replace(/\.\d{3}Z$/, "");
+            localNow.getFullYear() +
+            "-" +
+            String(localNow.getMonth() + 1).padStart(2, "0") +
+            "-" +
+            String(localNow.getDate()).padStart(2, "0") +
+            " " +
+            String(localNow.getHours()).padStart(2, "0") +
+            ":" +
+            String(localNow.getMinutes()).padStart(2, "0") +
+            ":" +
+            String(localNow.getSeconds()).padStart(2, "0");
 
         /* ---------- BUILD ORDER ---------- */
 
