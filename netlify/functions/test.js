@@ -1,11 +1,17 @@
 exports.handler = async () => {
 
+    const testOrder = {
+        order_nr: "TEST-001",
+        order_status: "open",
+        order_comment: "created"
+    };
+
     const content = Buffer.from(
-        "Netlify → GitHub write test"
+        JSON.stringify(testOrder, null, 2)
     ).toString("base64");
 
     const response = await fetch(
-        "https://api.github.com/repos/TangoMermaid/TM_Shop_Secure/contents/test_write.txt",
+        "https://api.github.com/repos/TangoMermaid/TM_Shop_Secure/contents/orders_secure/test_order.json",
         {
             method: "PUT",
             headers: {
@@ -14,7 +20,7 @@ exports.handler = async () => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                message: "Netlify write test",
+                message: "Create test order JSON",
                 content: content
             })
         }
@@ -26,7 +32,7 @@ exports.handler = async () => {
         statusCode: response.status,
         body: JSON.stringify({
             success: response.ok,
-            message: data.message || "File created"
+            message: data.message || "File written"
         })
     };
 };
