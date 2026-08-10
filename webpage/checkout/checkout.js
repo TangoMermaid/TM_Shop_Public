@@ -265,8 +265,8 @@ function validateCheckout(){
         isValidName(name);
 
 
-    const emailValid =
-        /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+   const emailValid =
+       /^[^\s@]{2,}@[^\s@]{2,}\.[A-Za-z]{2,}$/.test(email);
 
 
     const checkboxes =
@@ -391,19 +391,17 @@ function isValidName(name){
     const words = normalizeName(name).split(" ");
 
     if(words.length < 2){
-
         return false;
-
     }
 
     return words.every(word => {
 
         const cleanWord = word.replace(/[-']/g, "");
 
-        return cleanWord.length >= 2;
+        return /^[A-Za-zÀ-ÖØ-öø-ÿ]+$/.test(cleanWord) &&
+               cleanWord.length >= 2;
 
     });
-
 }
 
 let currentItem = null;
