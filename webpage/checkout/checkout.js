@@ -457,7 +457,6 @@ class Item{
 
 }
 
-```javascript
 /* ---------- ACTIVATION VEIL ---------- */
 
 const scanButton = document.getElementById("scanButton");
@@ -996,7 +995,6 @@ function showSuccess(itemID){
         .classList.remove("active");
 
 }
-```
 
 function showSuccess(itemID){
 
