@@ -827,17 +827,18 @@ if (scanButton && topVeil && bottomVeil){
         document.getElementById("itemButtons").classList.remove("active");
 
         document.getElementById("backButton").style.display =
-            "block";
+            "none";
 
         document.getElementById("itemButtons").innerHTML = `
-            <button id="errorBackButton">
-                BACK
-            </button>
+             <button id="errorBackButton">
+                 BACK
+             </button>
+             <button id="rescanButton">
+                 RE-SCAN
+             </button>
+         `;
 
-            <button id="rescanButton">
-                RE-SCAN
-            </button>
-        `;
+document.getElementById("itemButtons").classList.add("active");
 
         document.getElementById("itemButtons").classList.add("active");
 
