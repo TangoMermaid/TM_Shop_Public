@@ -748,6 +748,7 @@ if (scanButton && topVeil && bottomVeil){
    
        requestAnimationFrame(scanFrame);
    }
+}
 
 function showSuccess(itemID){
 
