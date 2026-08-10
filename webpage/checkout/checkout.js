@@ -467,200 +467,287 @@ const bottomVeil = document.getElementById("bottomVeil");
 
 if (scanButton && topVeil && bottomVeil){
 
-    scanButton.addEventListener("click", () => {
-
-        const divider = document.getElementById("divider");
-
-        const dividerBottom =
-            divider.offsetTop + divider.offsetHeight;
-
-        topVeil.style.top = "0px";
-        topVeil.style.height = dividerBottom + "px";
-
-        const firstRedLine = 844;
-
-        bottomVeil.style.top = firstRedLine + "px";
-        bottomVeil.style.bottom = "0";
-
-        topVeil.style.display = "block";
-        bottomVeil.style.display = "block";
-
-        document.getElementById("permissionDialog").style.display = "flex";
-        document.getElementById("backButton").style.display = "block";
-
-        document.getElementById("allowCameraButton").onclick = async () => {
-
-    try{
-
-        cameraStream = await navigator.mediaDevices.getUserMedia({
-
-            video:{
-                facingMode:"environment"
-            }
-
-        });
-
-        const camera = document.createElement("video");
-
-        camera.autoplay = true;
-
-        camera.playsInline = true;
-
-        camera.srcObject = cameraStream;
-
-        camera.style.width = "100%";
-        camera.style.height = "100%";
-        camera.style.objectFit = "cover";
-
-        const placeholder = document.getElementById("cameraPlaceholder");
-
-        placeholder.innerHTML = "";
-
-        placeholder.appendChild(camera);
-
-        document.getElementById("scanButton").style.visibility = "hidden";
-
-        document.getElementById("cameraInstruction").style.display = "block";
-
-        console.log("Camera successfully attached.");
-
-scanTimeout = setTimeout(() => {
-
-    document.getElementById("cameraInstruction").style.display = "none";
-
-    const testScanItems = [
-
-    "TM000001",
-    "TM000002",
-    "TM000003",
-    "TM000004",
-    "TM000005"
-
-];
-
-
-const randomID =
-    testScanItems[Math.floor(Math.random() * testScanItems.length)];
-
-
-currentItem = new Item(findItem(randomID));
-
-    console.log(currentItem);
-
-    showSuccess(currentItem.getID());
-
-    showItemState();
-
-}, 2000);
-
-
-    }
-
-    catch(error){
-
-        console.error(error);
-        alert("Camera could not be started.");
-
-    }
-
-};
-
-    });
-
-}
-
-function startNextScan(){
-
-    document.getElementById("scanItemID").style.display = "none";
-
-    document.getElementById("scanCompliment").style.display = "none";
-
-
-    document.getElementById("cameraPlaceholder").innerHTML = "";
-
-    document.getElementById("cameraPlaceholder").style.background = "rgba(0,0,0,0.50)";
-
-
-    document.getElementById("backButton").style.display = "block";
-
-
-    const camera = document.createElement("video");
-
-    camera.autoplay = true;
-    camera.playsInline = true;
-
-
-    navigator.mediaDevices.getUserMedia({
-
-        video:{
-            facingMode:"environment"
-        }
-
-    })
-
-    .then(stream => {
-
-        cameraStream = stream;
-
-        camera.srcObject = stream;
-
-
-        camera.style.width = "100%";
-        camera.style.height = "100%";
-        camera.style.objectFit = "cover";
-
-
-        document.getElementById("cameraPlaceholder").appendChild(camera);
-
-
-        document.getElementById("cameraInstruction").style.display = "block";
-
-
-        scanTimeout = setTimeout(() => {
-
-            document.getElementById("cameraInstruction").style.display = "none";
-
-
-            const testScanItems = [
-
-                "TM000001",
-                "TM000002",
-                "TM000003",
-                "TM000004",
-                "TM000005"
-
-            ];
-
-
-            const randomID =
-                testScanItems[Math.floor(Math.random() * testScanItems.length)];
-
-
-            currentItem = new Item(findItem(randomID));
-
-
-            console.log(currentItem);
-
-
-            showSuccess(currentItem.getID());
-
-            showItemState();
-
-
-        }, 2000);
-
-
-    })
-
-    .catch(error => {
-
-        console.error(error);
-
-        alert("Camera could not be started.");
-
-    });
-
-}
+   scanButton.addEventListener("click", () => {
+   
+       const divider = document.getElementById("divider");
+       const dividerBottom =
+           divider.offsetTop + divider.offsetHeight;
+   
+       topVeil.style.top = "0px";
+       topVeil.style.height = dividerBottom + "px";
+   
+       const firstRedLine = 844;
+   
+       bottomVeil.style.top = firstRedLine + "px";
+       bottomVeil.style.bottom = "0";
+   
+       topVeil.style.display = "block";
+       bottomVeil.style.display = "block";
+   
+       document.getElementById("permissionDialog").style.display = "flex";
+       document.getElementById("backButton").style.display = "block";
+   
+       document.getElementById("allowCameraButton").onclick = async () => {
+   
+           try {
+   
+               // Load QR reader
+               if (!window.jsQR) {
+                   await new Promise((resolve, reject) => {
+   
+                       const script = document.createElement("script");
+   
+                       script.src =
+                           "https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js";
+   
+                       script.onload = resolve;
+                       script.onerror = reject;
+   
+                       document.head.appendChild(script);
+                   });
+               }
+   
+               cameraStream = await navigator.mediaDevices.getUserMedia({
+                   video: {
+                       facingMode: "environment"
+                   }
+               });
+   
+               const camera = document.createElement("video");
+   
+               camera.autoplay = true;
+               camera.playsInline = true;
+               camera.srcObject = cameraStream;
+   
+               camera.style.width = "100%";
+               camera.style.height = "100%";
+               camera.style.objectFit = "cover";
+   
+               const placeholder =
+                   document.getElementById("cameraPlaceholder");
+   
+               placeholder.innerHTML = "";
+               placeholder.appendChild(camera);
+   
+               document.getElementById("scanButton").style.visibility = "hidden";
+               document.getElementById("cameraInstruction").style.display = "block";
+   
+               console.log("Camera successfully attached.");
+   
+               camera.onloadedmetadata = () => {
+   
+                   const canvas = document.createElement("canvas");
+                   const context = canvas.getContext("2d");
+   
+                   function scanFrame() {
+   
+                       if (!cameraStream) return;
+   
+                       if (camera.readyState === camera.HAVE_ENOUGH_DATA) {
+   
+                           canvas.width = camera.videoWidth;
+                           canvas.height = camera.videoHeight;
+   
+                           context.drawImage(
+                               camera,
+                               0,
+                               0,
+                               canvas.width,
+                               canvas.height
+                           );
+   
+                           const imageData = context.getImageData(
+                               0,
+                               0,
+                               canvas.width,
+                               canvas.height
+                           );
+   
+                           const code = jsQR(
+                               imageData.data,
+                               imageData.width,
+                               imageData.height
+                           );
+   
+                           if (code && code.data) {
+   
+                               const scannedID = code.data.trim();
+   
+                               console.log("QR scanned:", scannedID);
+   
+                               const foundItem = findItem(scannedID);
+   
+                               if (foundItem) {
+   
+                                   document.getElementById("cameraInstruction").style.display = "none";
+   
+                                   currentItem = new Item(foundItem);
+   
+                                   console.log(currentItem);
+   
+                                   showSuccess(currentItem.getID());
+                                   showItemState();
+   
+                                   return;
+                               }
+   
+                               console.log("QR code is not a valid TM item:", scannedID);
+                           }
+                       }
+   
+                       requestAnimationFrame(scanFrame);
+                   }
+   
+                   requestAnimationFrame(scanFrame);
+               };
+   
+           }
+   
+           catch(error) {
+   
+               console.error(error);
+               alert("Camera could not be started.");
+   
+           }
+   
+       };
+   
+   });
+   
+   
+   function startNextScan(){
+   
+       document.getElementById("scanItemID").style.display = "none";
+       document.getElementById("scanCompliment").style.display = "none";
+   
+       document.getElementById("cameraPlaceholder").innerHTML = "";
+       document.getElementById("cameraPlaceholder").style.background =
+           "rgba(0,0,0,0.50)";
+   
+       document.getElementById("backButton").style.display = "block";
+   
+       const camera = document.createElement("video");
+   
+       camera.autoplay = true;
+       camera.playsInline = true;
+   
+       navigator.mediaDevices.getUserMedia({
+           video: {
+               facingMode: "environment"
+           }
+       })
+   
+       .then(stream => {
+   
+           cameraStream = stream;
+           camera.srcObject = stream;
+   
+           camera.style.width = "100%";
+           camera.style.height = "100%";
+           camera.style.objectFit = "cover";
+   
+           document.getElementById("cameraPlaceholder").appendChild(camera);
+   
+           document.getElementById("cameraInstruction").style.display = "block";
+   
+           if (!window.jsQR) {
+   
+               const script = document.createElement("script");
+   
+               script.src =
+                   "https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js";
+   
+               script.onload = () => startQRScan(camera);
+   
+               script.onerror = () => {
+                   alert("QR reader could not be loaded.");
+               };
+   
+               document.head.appendChild(script);
+   
+           } else {
+   
+               startQRScan(camera);
+   
+           }
+   
+       })
+   
+       .catch(error => {
+   
+           console.error(error);
+           alert("Camera could not be started.");
+   
+       });
+   }
+   
+   
+   function startQRScan(camera){
+   
+       const canvas = document.createElement("canvas");
+       const context = canvas.getContext("2d");
+   
+       function scanFrame(){
+   
+           if (!cameraStream) return;
+   
+           if (camera.readyState === camera.HAVE_ENOUGH_DATA) {
+   
+               canvas.width = camera.videoWidth;
+               canvas.height = camera.videoHeight;
+   
+               context.drawImage(
+                   camera,
+                   0,
+                   0,
+                   canvas.width,
+                   canvas.height
+               );
+   
+               const imageData = context.getImageData(
+                   0,
+                   0,
+                   canvas.width,
+                   canvas.height
+               );
+   
+               const code = jsQR(
+                   imageData.data,
+                   imageData.width,
+                   imageData.height
+               );
+   
+               if (code && code.data) {
+   
+                   const scannedID = code.data.trim();
+   
+                   console.log("QR scanned:", scannedID);
+   
+                   const foundItem = findItem(scannedID);
+   
+                   if (foundItem) {
+   
+                       document.getElementById("cameraInstruction").style.display = "none";
+   
+                       currentItem = new Item(foundItem);
+   
+                       console.log(currentItem);
+   
+                       showSuccess(currentItem.getID());
+                       showItemState();
+   
+                       return;
+                   }
+   
+                   console.log("QR code is not a valid TM item:", scannedID);
+               }
+           }
+   
+           requestAnimationFrame(scanFrame);
+       }
+   
+       requestAnimationFrame(scanFrame);
+   }
 
 function showSuccess(itemID){
 
