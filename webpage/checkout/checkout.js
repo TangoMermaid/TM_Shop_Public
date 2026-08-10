@@ -1036,11 +1036,12 @@ function showSuccess(itemID){
 function showItemState(){
 
     console.log(document.getElementById("itemPanel"));
+
     document.getElementById("scanItemID").textContent =
         currentItem["Item ID"];
 
     document.getElementById("itemInfoID").textContent =
-    currentItem.getID();
+        currentItem.getID();
 
     document.getElementById("itemProduct").textContent =
         "Product: " + currentItem.getCategory();
@@ -1068,7 +1069,73 @@ function showItemState(){
 
         console.log("Activating itemButtons");
 
+        document.getElementById("itemButtons").innerHTML = `
+            <button id="itemBackButton">
+                BACK
+            </button>
+
+            <button id="addItemButton">
+                ADD IT
+            </button>
+        `;
+
         document.getElementById("itemButtons").classList.add("active");
+
+        document.getElementById("itemBackButton").onclick = () => {
+
+            document.getElementById("backButton").click();
+
+        };
+
+        document.getElementById("addItemButton").onclick = () => {
+
+            if(addItemToBasket(currentItem)){
+
+                document.getElementById("itemPanel").style.display = "none";
+
+                document.getElementById("itemButtons").classList.remove("active");
+
+                document.getElementById("scanItemID").innerHTML =
+                    "WELL DONE!<br>" +
+                    currentItem.getID() +
+                    "<br>IS NOW IN THE BASKET";
+
+                document.getElementById("scanItemID").style.display = "block";
+
+                document.getElementById("scanCompliment").style.display = "none";
+
+                document.getElementById("backButton").style.display = "block";
+
+                document.getElementById("cameraPlaceholder").style.background =
+                    "rgba(0,0,0,0.50)";
+
+                document.getElementById("cameraPlaceholder").innerHTML = `
+
+                    <div id="permissionDialog">
+
+                        <p>
+                            Scan next?
+                        </p>
+
+                        <button id="allowCameraButton">
+                            NEXT!
+                        </button>
+
+                    </div>
+
+                `;
+
+                document.getElementById("permissionDialog").style.display = "flex";
+
+                document.getElementById("allowCameraButton").onclick = () => {
+
+                    startNextScan();
+
+                };
+
+            }
+
+        };
 
     }, 2000);
 
